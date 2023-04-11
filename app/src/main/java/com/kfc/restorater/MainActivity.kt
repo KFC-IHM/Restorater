@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
         sendNotification(
             "Connexion réussie",
             "Vous êtes bien connecté à Restorater !",
-            "login_notification_channel",
+            RestoApplication.CHANNEL_ID,
             NotificationCompat.PRIORITY_DEFAULT
         )
     }
