@@ -14,4 +14,9 @@
     <string name="list">List</string>
     <string name="location">Location</string>
     <string name="user">User</string>
+    <string name="bienvenue">Bienvenue !</string>
+    <string name="label_email">Adresse email:</string>
+    <string name="enter_email">mon.adresse@gmail.com</string>
+    <string name="enter_password">****</string>
+    <string name="label_password">Mot de passe:</string>
 </resources>
