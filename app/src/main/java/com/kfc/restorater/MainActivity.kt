@@ -29,12 +29,14 @@ class MainActivity : AppCompatActivity() {
 
         val mapMenu = findViewById<ImageButton>(R.id.map_menu)
         mapMenu.setOnClickListener {
-            setContentView(R.layout.activity_map)
+            //TODO: Change to map activity
+            // setContentView(R.layout.activity_map)
         }
 
         val userMenu = findViewById<ImageButton>(R.id.user_menu)
         userMenu.setOnClickListener {
-            setContentView(R.layout.activity_user)
+            //TODO: Change to user activity
+            // setContentView(R.layout.activity_user)
         }
     }
 
