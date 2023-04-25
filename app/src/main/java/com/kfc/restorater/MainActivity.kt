@@ -13,7 +13,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.old_activity_main)
 
         sendNotification(
             "Connexion réussie",
@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
 
         val listMenu = findViewById<ImageButton>(R.id.list_menu)
         listMenu.setOnClickListener {
-            setContentView(R.layout.activity_main)
+            setContentView(R.layout.old_activity_main)
         }
 
         val mapMenu = findViewById<ImageButton>(R.id.map_menu)
