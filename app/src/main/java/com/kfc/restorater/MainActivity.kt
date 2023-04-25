@@ -12,7 +12,8 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import com.google.android.material.snackbar.Snackbar
 import com.kfc.restorater.data.Restaurant
 import com.kfc.restorater.databinding.ActivityMainBinding
-import com.kfc.restorater.repository.remote.restaurants.RetrofitRestaurantWebService
+import com.kfc.restorater.repository.remote.restaurants.RetrofitRestaurantApi
+import com.kfc.restorater.repository.remote.restaurants.RetrofitWebServiceGenerator
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -42,9 +43,9 @@ class MainActivity : AppCompatActivity() {
                 .setAction("Action", null).show()
         }
 
-        val webService = RetrofitRestaurantWebService()
+        val webService = RetrofitWebServiceGenerator().createService(RetrofitRestaurantApi::class.java)
         // log the result of the call to the web service
-        webService.api.getRestaurants().enqueue(object : Callback<List<Restaurant>> {
+        webService.getRestaurants().enqueue(object : Callback<List<Restaurant>> {
             override fun onResponse(
                 call: Call<List<Restaurant>>,
                 response: Response<List<Restaurant>>
@@ -57,7 +58,7 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-        webService.api.getRestaurant(1).enqueue(object : Callback<Restaurant> {
+        webService.getRestaurant(1).enqueue(object : Callback<Restaurant> {
             override fun onResponse(call: Call<Restaurant>, response: Response<Restaurant>) {
                 Log.d("MainActivity", "onResponse: ${response.body()}")
             }
@@ -69,7 +70,7 @@ class MainActivity : AppCompatActivity() {
 
 
         val image = assets.open("test.png").readBytes()
-        webService.api.createRestaurant(
+        webService.createRestaurant(
             "KFC2", "description",
             image = MultipartBody.Part.createFormData(
                 "image", "test.png", RequestBody.create(

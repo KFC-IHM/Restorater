@@ -7,16 +7,13 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
 
-class RetrofitRestaurantWebService {
+class RetrofitWebServiceGenerator {
     private val API_BASE_URL = "https://restorater.ozeliurs.com/api/"
 
     private val httpClient =
         OkHttpClient.Builder().addInterceptor(BasicAuthInterceptor("admin", "password"))
-    val api: RetrofitRestaurantApi by lazy {
-        createRestaurantApi()
-    }
 
-    private fun createRestaurantApi(): RetrofitRestaurantApi {
+    fun <S> createService(serviceClass: Class<S>?): S {
         val moshi = Moshi.Builder()
             .add(KotlinJsonAdapterFactory())
             .build()
@@ -27,6 +24,6 @@ class RetrofitRestaurantWebService {
             .client(httpClient.build())
             .build()
 
-        return retrofit.create(RetrofitRestaurantApi::class.java)
+        return retrofit.create(serviceClass!!)
     }
 }
