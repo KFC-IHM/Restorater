@@ -1,6 +1,7 @@
 package com.kfc.restorater.repository.remote.restaurants
 
 import com.kfc.restorater.data.Restaurant
+import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -16,7 +17,7 @@ interface RetrofitRestaurantApi {
     fun createRestaurant(
         @Part("name") name: String,
         @Part("description") description: String,
-        @Part("image") image: String,
-        @Part("owner") owner: Int
+        @Part image: MultipartBody.Part,
+        @Part("owner") owner: Int,
     ): Call<Restaurant>
 }

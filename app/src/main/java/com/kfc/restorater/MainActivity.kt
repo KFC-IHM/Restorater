@@ -13,6 +13,9 @@ import com.google.android.material.snackbar.Snackbar
 import com.kfc.restorater.data.Restaurant
 import com.kfc.restorater.databinding.ActivityMainBinding
 import com.kfc.restorater.repository.remote.restaurants.RetrofitRestaurantWebService
+import okhttp3.MediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -64,7 +67,29 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
+
+        val image = assets.open("test.png").readBytes()
+        webService.api.createRestaurant(
+            "KFC2", "description",
+            image = MultipartBody.Part.createFormData(
+                "image", "test.png", RequestBody.create(
+                    MediaType.parse("image/*"), image
+                )
+            ),
+            owner = 1
+        ).enqueue(object : Callback<Restaurant> {
+            override fun onResponse(call: Call<Restaurant>, response: Response<Restaurant>) {
+                Log.d("MainActivity", "onResponse: ${response.body()}")
+            }
+
+            override fun onFailure(call: Call<Restaurant>, t: Throwable) {
+                Log.d("MainActivity", "onFailure: ${t.message}")
+            }
+        }
+        )
+
     }
+
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
