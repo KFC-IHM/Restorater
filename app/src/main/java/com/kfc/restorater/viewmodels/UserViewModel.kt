@@ -12,7 +12,7 @@ import io.reactivex.Observable
 class UserViewModel : BaseObservable() {
     val userRepo = RetrofitWebServiceGenerator().createService(UserRepo::class.java)
     val authRepo = RetrofitWebServiceGenerator().createService(RetrofitAuthApi::class.java)
-    var user: User? = null
+    val user: User? = null
 
 
     fun login(credentials: Credentials): Observable<User>? {
@@ -20,16 +20,14 @@ class UserViewModel : BaseObservable() {
             val decodedJWT = JWT(jwt.access)
             val userId = decodedJWT.getClaim("user_id").asInt()
             if (userId != null) {
-                userRepo.getUser(userId).map { user ->
-                    this.user = user
-                    user
+                userRepo.getUser(userId).flatMap {
+                    user -> Observable.just(user)
                 }
             } else {
                 Observable.error(Throwable("Invalid JWT"))
             }
         }
     }
-
     fun getUsers(): Observable<List<User>>? {
         return userRepo.getUsers()
     }

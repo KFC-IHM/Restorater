@@ -12,5 +12,10 @@ data class Restaurant(
     val image: String? = null,
     val owner: Int,
     val review_set: List<Review>,
-) : Parcelable
+) : Parcelable {
+
+    fun rating(): Float {
+        return review_set.map { it.rating }.average().toFloat()
+    }
+}
 

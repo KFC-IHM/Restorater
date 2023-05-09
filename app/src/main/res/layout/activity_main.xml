@@ -2,13 +2,6 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:bind="http://schemas.android.com/tools">
 
-    <data>
-
-        <variable
-            name="viewModel"
-            type="com.kfc.restorater.viewmodels.LoginViewModel" />
-    </data>
-
 
     <ScrollView
         android:layout_width="match_parent"
@@ -28,7 +21,7 @@
                 android:hint="Email"
                 android:inputType="textEmailAddress"
                 android:padding="8dp"
-                android:text="@={viewModel.userEmail}" />
+                 />
 
 
             <EditText
@@ -38,17 +31,15 @@
                 android:hint="Password"
                 android:inputType="textPassword"
                 android:padding="8dp"
-                android:text="@={viewModel.userPassword}" />
+                 />
 
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:onClick="@{()-> viewModel.onLoginClicked()}"
                 android:text="LOGIN"
-                bind:toastMessage="@{viewModel.toastMessage}" />
-
+                android:textColor="@android:color/white" />
 
         </LinearLayout>
 

@@ -1,22 +1,13 @@
 package com.kfc.restorater
 
-import android.Manifest
-import android.content.pm.PackageManager
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import com.kfc.restorater.repo.api.RestaurantRepo
 import com.kfc.restorater.repo.RetrofitWebServiceGenerator
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import androidx.core.app.ActivityCompat
-import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
 
-class MainActivity : AppCompatActivity() {
+class MainActivityOld : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,7 +37,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.menu_main, menu)
+        //menuInflater.inflate(R.menu.menu_main, menu) TODO: Uncomment this line
         return true
     }
 

@@ -11,7 +11,7 @@ class RestaurantFactory {
             image: String? = null,
             owner: Int,
         ): Restaurant {
-            return Restaurant(id, name, description, image, owner)
+            return Restaurant(id, name, description, image, owner, listOf())
         }
     }
 }
