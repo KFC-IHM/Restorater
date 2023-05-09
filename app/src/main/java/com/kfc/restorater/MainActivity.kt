@@ -22,13 +22,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.old_activity_main)
 
-        sendNotification(
-            "Connexion réussie",
-            "Vous êtes bien connecté à Restorater !",
-            RestoApplication.CHANNEL_ID,
-            NotificationCompat.PRIORITY_DEFAULT
-        )
-
         val listMenu = findViewById<ImageButton>(R.id.list_menu)
         listMenu.setOnClickListener {
             setContentView(R.layout.old_activity_main)
@@ -57,21 +50,5 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
-    private fun sendNotification(title: String, message: String, channelId: String, priority: Int) {
-        val notification = NotificationCompat.Builder(this, channelId)
-            .setSmallIcon(R.drawable.ic_launcher_foreground)
-            .setContentTitle(title)
-            .setContentText(message)
-            .setPriority(priority)
-
-        if (ActivityCompat.checkSelfPermission(
-                this,
-                Manifest.permission.POST_NOTIFICATIONS
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            return
-        }
-        NotificationManagerCompat.from(applicationContext).notify(0, notification.build())
-    }
 
 }
