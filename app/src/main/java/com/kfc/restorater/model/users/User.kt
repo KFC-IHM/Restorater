@@ -1,9 +1,12 @@
 package com.kfc.restorater.model.users
 
+import android.os.Parcelable
 import com.kfc.restorater.model.comment.Comment
 import com.kfc.restorater.model.restaurant.Restaurant
 import com.kfc.restorater.model.review.Review
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 // use django model
 data class User(
     val id: Int? = null,
@@ -23,4 +26,4 @@ data class User(
     val review_set: List<Review>,
     val restaurant_set: List<Restaurant>,
     val comment_set: List<Comment>,
-)
+) : Parcelable
