@@ -1,4 +1,4 @@
-package com.kfc.restorater.model
+package com.kfc.restorater.data.restaurant
 
 data class Restaurant(
     val id: Int? = null,
@@ -7,3 +7,4 @@ data class Restaurant(
     val image: String? = null,
     val owner: Int,
 )
+

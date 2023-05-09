@@ -1,4 +1,4 @@
-package com.kfc.restorater.model.users
+package com.kfc.restorater.data.users
 
 data class Credentials(
     val username: String,

@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
         val webService =
             RetrofitWebServiceGenerator().createService(RestaurantRepo::class.java)
 
-        webService.fetchRestaurant(1).enqueue(object : Callback<Restaurant> {
+        webService.getRestaurant(1).enqueue(object : Callback<Restaurant> {
             override fun onResponse(call: Call<Restaurant>, response: Response<Restaurant>) {
                 Log.d("MainActivity", "onResponse: ${response.body()}")
             }

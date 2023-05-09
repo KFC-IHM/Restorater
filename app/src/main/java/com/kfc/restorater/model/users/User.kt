@@ -1,4 +1,9 @@
-package com.kfc.restorater.model.users
+package com.kfc.restorater.data.users
+
+import com.kfc.restorater.data.comment.Comment
+import com.kfc.restorater.data.restaurant.Restaurant
+import com.kfc.restorater.data.review.Review
+
 // use django model
 data class User(
     val id: Int? = null,
@@ -15,7 +20,7 @@ data class User(
     val is_moderator: Boolean,
     val is_restaurateur: Boolean,
     val is_customer: Boolean,
-    val review_set: List<String>,
-    val restaurant_set: List<String>,
-    val comment_set: List<String>,
+    val review_set: List<Review>,
+    val restaurant_set: List<Restaurant>,
+    val comment_set: List<Comment>,
 )
