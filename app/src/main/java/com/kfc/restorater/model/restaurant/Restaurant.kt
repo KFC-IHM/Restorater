@@ -1,6 +1,7 @@
 package com.kfc.restorater.model.restaurant
 
 import android.os.Parcelable
+import com.kfc.restorater.model.review.Review
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
@@ -10,5 +11,6 @@ data class Restaurant(
     val description: String,
     val image: String? = null,
     val owner: Int,
+    val review_set: List<Review>,
 ) : Parcelable
 
