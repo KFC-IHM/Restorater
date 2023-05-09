@@ -7,8 +7,9 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
 
+const val API_BASE_URL = "https://restorater.ozeliurs.com/api/"
+
 class RetrofitWebServiceGenerator {
-    private val API_BASE_URL = "https://restorater.ozeliurs.com/api/"
 
     private val httpClient =
         OkHttpClient.Builder().addInterceptor(BasicAuthInterceptor("admin", "password"))
