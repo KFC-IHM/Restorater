@@ -10,7 +10,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.google.android.material.snackbar.Snackbar
-import com.kfc.restorater.data.restaurants.Restaurant
+import com.kfc.restorater.data.restaurant.Restaurant
 import com.kfc.restorater.databinding.ActivityMainBinding
 import com.kfc.restorater.repository.remote.restaurants.RetrofitRestaurantApi
 import com.kfc.restorater.repository.remote.restaurants.RetrofitWebServiceGenerator

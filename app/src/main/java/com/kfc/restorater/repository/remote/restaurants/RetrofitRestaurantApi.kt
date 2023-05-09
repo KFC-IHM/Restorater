@@ -1,6 +1,6 @@
 package com.kfc.restorater.repository.remote.restaurants
 
-import com.kfc.restorater.data.restaurants.Restaurant
+import com.kfc.restorater.data.restaurant.Restaurant
 import retrofit2.Call
 import retrofit2.http.*
 
