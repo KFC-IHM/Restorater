@@ -1,4 +1,4 @@
-package com.kfc.restorater.repo
+package com.kfc.restorater.repo.api
 
 import android.database.Observable
 import com.kfc.restorater.model.restaurant.Restaurant

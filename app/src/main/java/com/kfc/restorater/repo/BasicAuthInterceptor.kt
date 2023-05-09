@@ -1,4 +1,4 @@
-package com.kfc.restorater.repo.api
+package com.kfc.restorater.repo
 
 import okhttp3.Credentials
 import okhttp3.Interceptor
