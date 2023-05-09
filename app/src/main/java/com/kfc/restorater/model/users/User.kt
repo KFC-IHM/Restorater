@@ -1,4 +1,4 @@
-package com.kfc.restorater.data.users
+package com.kfc.restorater.model.users
 // use django model
 data class User(
     val id: Int? = null,

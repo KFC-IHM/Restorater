@@ -5,18 +5,11 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
-import android.view.MenuItem
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
-import com.google.android.material.snackbar.Snackbar
-import com.kfc.restorater.data.restaurant.Restaurant
-import com.kfc.restorater.databinding.ActivityMainBinding
-import com.kfc.restorater.repository.remote.restaurants.RetrofitRestaurantApi
-import com.kfc.restorater.repository.remote.restaurants.RetrofitWebServiceGenerator
+import com.kfc.restorater.model.Restaurant
+import com.kfc.restorater.repo.RestaurantRepo
+import com.kfc.restorater.repo.api.RetrofitWebServiceGenerator
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -55,22 +48,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         val webService =
-            RetrofitWebServiceGenerator().createService(RetrofitRestaurantApi::class.java)
-//        // log the result of the call to the web service
-//        webService.getRestaurants().enqueue(object : Callback<List<Restaurant>> {
-//            override fun onResponse(
-//                call: Call<List<Restaurant>>,
-//                response: Response<List<Restaurant>>
-//            ) {
-//                Log.d("MainActivity", "onResponse: ${response.body()}")
-//            }
-//
-//            override fun onFailure(call: Call<List<Restaurant>>, t: Throwable) {
-//                Log.d("MainActivity", "onFailure: ${t.message}")
-//            }
-//        })
+            RetrofitWebServiceGenerator().createService(RestaurantRepo::class.java)
 
-        webService.getRestaurant(1).enqueue(object : Callback<Restaurant> {
+        webService.fetchRestaurant(1).enqueue(object : Callback<Restaurant> {
             override fun onResponse(call: Call<Restaurant>, response: Response<Restaurant>) {
                 Log.d("MainActivity", "onResponse: ${response.body()}")
             }
@@ -98,30 +78,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
         )
-
-//        val authWebService =
-//            RetrofitWebServiceGenerator().createService(RetrofitAuthApi::class.java)
-//        authWebService.login(
-//            Credentials(
-//                username = "admin",
-//                password = "password"
-//            )
-//        ).enqueue(
-//            object : Callback<JWT> {
-//                override fun onResponse(
-//                    call: Call<JWT>,
-//                    response: Response<JWT>
-//                ) {
-//                    Log.d("MainActivity", "login onResponse: ${response.body()}")
-//                }
-//
-//                override fun onFailure(call: Call<JWT>, t: Throwable) {
-//                    Log.d("MainActivity", "login onFailure: ${t.message}")
-//                }
-//            }
-//        )
-
-
     }
 
 
@@ -130,6 +86,7 @@ class MainActivity : AppCompatActivity() {
         menuInflater.inflate(R.menu.menu_main, menu)
         return true
     }
+
     private fun sendNotification(title: String, message: String, channelId: String, priority: Int) {
         val notification = NotificationCompat.Builder(this, channelId)
             .setSmallIcon(R.drawable.ic_launcher_foreground)

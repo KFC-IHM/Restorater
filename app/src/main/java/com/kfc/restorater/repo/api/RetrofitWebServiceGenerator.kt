@@ -1,4 +1,4 @@
-package com.kfc.restorater.repository.remote.restaurants
+package com.kfc.restorater.repo.api
 
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory

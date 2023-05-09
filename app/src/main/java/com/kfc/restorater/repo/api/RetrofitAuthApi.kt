@@ -1,7 +1,7 @@
-package com.kfc.restorater.repository.remote.restaurants
+package com.kfc.restorater.repo.api
 
-import com.kfc.restorater.data.users.Credentials
-import com.kfc.restorater.data.users.JWT
+import com.kfc.restorater.model.users.Credentials
+import com.kfc.restorater.model.users.JWT
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.POST
