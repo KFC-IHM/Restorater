@@ -7,8 +7,8 @@ import com.kfc.restorater.repo.RetrofitWebServiceGenerator
 import io.reactivex.Observable
 
 class RestaurantViewModel : ViewModel() {
-    val restaurantRepo = RetrofitWebServiceGenerator().createService(RestaurantRepo::class.java)
-    var observableRestaurants: Observable<List<Restaurant>>? = null
+    private val restaurantRepo = RetrofitWebServiceGenerator().createService(RestaurantRepo::class.java)
+    private var observableRestaurants: Observable<List<Restaurant>>? = null
 
     fun getRestaurants(): Observable<List<Restaurant>>? {
         if (observableRestaurants == null) {

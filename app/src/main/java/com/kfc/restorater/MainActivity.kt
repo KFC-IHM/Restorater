@@ -48,35 +48,6 @@ class MainActivity : AppCompatActivity() {
 
         val webService =
             RetrofitWebServiceGenerator().createService(RestaurantRepo::class.java)
-
-        webService.getRestaurant(1).enqueue(object : Callback<Restaurant> {
-            override fun onResponse(call: Call<Restaurant>, response: Response<Restaurant>) {
-                Log.d("MainActivity", "onResponse: ${response.body()}")
-            }
-
-            override fun onFailure(call: Call<Restaurant>, t: Throwable) {
-                Log.d("MainActivity", "onFailure: ${t.message}")
-            }
-        })
-
-
-        val image = assets.open("test.png").readBytes()
-        webService.createRestaurant(
-            Restaurant(
-                name = "Test Restaurant",
-                description = "Test Description",
-                owner = 1,
-            )
-        ).enqueue(object : Callback<Restaurant> {
-            override fun onResponse(call: Call<Restaurant>, response: Response<Restaurant>) {
-                Log.d("MainActivity", "onResponse: ${response.message()}")
-            }
-
-            override fun onFailure(call: Call<Restaurant>, t: Throwable) {
-                Log.d("MainActivity", "onFailure: ${t.message} ${t.cause}")
-            }
-        }
-        )
     }
 
 
