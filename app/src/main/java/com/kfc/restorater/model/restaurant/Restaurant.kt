@@ -1,4 +1,4 @@
-package com.kfc.restorater.data.restaurant
+package com.kfc.restorater.model.restaurant
 
 data class Restaurant(
     val id: Int? = null,

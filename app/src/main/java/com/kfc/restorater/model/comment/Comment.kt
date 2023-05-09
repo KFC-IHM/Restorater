@@ -1,4 +1,4 @@
-package com.kfc.restorater.data.comment
+package com.kfc.restorater.model.comment
 
 data class Comment(
     val id: Int? = null,

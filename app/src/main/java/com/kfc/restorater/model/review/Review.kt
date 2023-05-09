@@ -1,4 +1,4 @@
-package com.kfc.restorater.data.review
+package com.kfc.restorater.model.review
 
 data class Review(
     val id: Int? = null,

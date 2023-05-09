@@ -2,7 +2,7 @@ package com.kfc.restorater.viewmodels
 
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
-import com.kfc.restorater.data.restaurant.Restaurant
+import com.kfc.restorater.model.restaurant.Restaurant
 import com.kfc.restorater.repo.RestaurantRepo
 import com.kfc.restorater.repo.api.RetrofitWebServiceGenerator
 

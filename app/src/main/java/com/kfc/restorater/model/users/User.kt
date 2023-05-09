@@ -1,8 +1,8 @@
-package com.kfc.restorater.data.users
+package com.kfc.restorater.model.users
 
-import com.kfc.restorater.data.comment.Comment
-import com.kfc.restorater.data.restaurant.Restaurant
-import com.kfc.restorater.data.review.Review
+import com.kfc.restorater.model.comment.Comment
+import com.kfc.restorater.model.restaurant.Restaurant
+import com.kfc.restorater.model.review.Review
 
 // use django model
 data class User(

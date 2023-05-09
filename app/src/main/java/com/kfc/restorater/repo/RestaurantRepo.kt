@@ -1,7 +1,7 @@
 package com.kfc.restorater.repo
 
 import android.database.Observable
-import com.kfc.restorater.data.restaurant.Restaurant
+import com.kfc.restorater.model.restaurant.Restaurant
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
