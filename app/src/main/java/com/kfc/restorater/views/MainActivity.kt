@@ -1,29 +1,14 @@
-package com.journaldev.androidmvvmbasics.views
-
-import android.os.Bundle
-import android.view.View
-import android.widget.Toast
+import android.arch.lifecycle.Observer
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.BindingAdapter
-import androidx.databinding.DataBindingUtil
-import com.kfc.restorater.R
-import com.kfc.restorater.viewmodels.LoginViewModel
-import com.kfc.restorater.databinding.ActivityMainBinding
+import com.kfc.restorater.model.RestaurantModel
+import com.kfc.restorater.viewmodels.RestaurantViewModel
 
 class MainActivity : AppCompatActivity() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        val activityMainBinding: ActivityMainBinding =
-            DataBindingUtil.setContentView(this, R.layout.activity_main)
-        activityMainBinding.viewModel = LoginViewModel()
-        activityMainBinding.executePendingBindings()
-    }
 
-    companion object {
-        @BindingAdapter("toastMessage")
-        fun runMe(view: View, message: String?) {
-            if (message != null) Toast.makeText(view.context, message, Toast.LENGTH_SHORT).show()
-        }
-    }
+    val restaurantViewModel = RestaurantViewModel()
+
+    restaurantViewModel.getRestaurants().observe(this, Observer<List<RestaurantModel>> { restaurants ->
+        // update UI
+    })
 }
