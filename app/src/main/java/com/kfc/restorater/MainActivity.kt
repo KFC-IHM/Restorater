@@ -7,7 +7,6 @@ import android.util.Log
 import android.view.Menu
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
-import com.kfc.restorater.model.Restaurant
 import com.kfc.restorater.repo.api.RestaurantRepo
 import com.kfc.restorater.repo.RetrofitWebServiceGenerator
 import retrofit2.Call

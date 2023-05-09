@@ -1,6 +1,6 @@
 package com.kfc.restorater.repo.api
 
-import android.database.Observable
+import io.reactivex.Observable
 import com.kfc.restorater.model.comment.Comment
 import retrofit2.http.Body
 import retrofit2.http.DELETE

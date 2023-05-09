@@ -1,18 +1,20 @@
 package com.kfc.restorater.viewmodels
 
-import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import com.kfc.restorater.model.restaurant.Restaurant
 import com.kfc.restorater.repo.api.RestaurantRepo
 import com.kfc.restorater.repo.RetrofitWebServiceGenerator
+import io.reactivex.Observable
 
 class RestaurantViewModel : ViewModel() {
     val restaurantRepo = RetrofitWebServiceGenerator().createService(RestaurantRepo::class.java)
-    var mutableRestaurants: MutableLiveData<List<Restaurant>> = MutableLiveData()
+    var observableRestaurants: Observable<List<Restaurant>>? = null
 
-    fun getRestaurants() {
-        if (mutableRestaurants.value == null) {
-            mutableRestaurants = restaurantRepo.getRestaurants()
+    fun getRestaurants(): Observable<List<Restaurant>>? {
+        if (observableRestaurants == null) {
+            observableRestaurants = restaurantRepo.getRestaurants()
         }
+
+        return observableRestaurants
     }
 }

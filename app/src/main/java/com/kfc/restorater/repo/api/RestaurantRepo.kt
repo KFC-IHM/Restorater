@@ -1,7 +1,7 @@
 package com.kfc.restorater.repo.api
 
-import android.database.Observable
 import com.kfc.restorater.model.restaurant.Restaurant
+import io.reactivex.Observable
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
