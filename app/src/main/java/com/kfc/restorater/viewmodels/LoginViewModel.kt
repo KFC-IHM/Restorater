@@ -1,47 +1,20 @@
 package com.kfc.restorater.viewmodels
 
-import android.text.TextUtils
-import android.util.Patterns
 import androidx.databinding.BaseObservable
-import androidx.databinding.Bindable
-import com.kfc.restorater.model.User
-import com.kfc.restorater.BR
+import com.kfc.restorater.model.users.User
+import com.kfc.restorater.repo.RetrofitWebServiceGenerator
+import com.kfc.restorater.repo.api.UserRepo
+import io.reactivex.Observable
 
-class LoginViewModel : BaseObservable() {
-    private val user: User = User("", "")
-    private val successMessage = "Login was successful"
-    private val errorMessage = "Email or Password not valid"
+class UserViewModel : BaseObservable() {
+    val userRepo = RetrofitWebServiceGenerator().createService(UserRepo::class.java)
+    var observableUsers: Observable<List<User>>? = null
 
-    @get:Bindable
-    var toastMessage: String? = null
-        private set
-
-    private fun setToastMessage(toastMessage: String) {
-        this.toastMessage = toastMessage
-        notifyPropertyChanged(BR.toastMessage)
-    }
-
-    @get:Bindable
-    var userEmail: String?
-        get() = user.getEmail()
-        set(email) {
-            user.setEmail(email)
-            notifyPropertyChanged(BR.userEmail)
+    fun getUsers(): Observable<List<User>>? {
+        if (observableUsers == null) {
+            observableUsers = userRepo.getUsers()
         }
 
-    @get:Bindable
-    var userPassword: String?
-        get() = user.getPassword()
-        set(password) {
-            user.setPassword(password)
-            notifyPropertyChanged(BR.userPassword)
-        }
-
-    fun onLoginClicked() {
-        if (isInputDataValid) setToastMessage(successMessage) else setToastMessage(errorMessage)
+        return observableUsers
     }
-
-    val isInputDataValid: Boolean
-        get() = !TextUtils.isEmpty(userEmail) && Patterns.EMAIL_ADDRESS.matcher(userEmail)
-            .matches() && userPassword!!.length > 5
 }
