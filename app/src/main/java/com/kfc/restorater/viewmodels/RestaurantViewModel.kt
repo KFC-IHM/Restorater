@@ -1,12 +1,11 @@
 package com.kfc.restorater.viewmodels
 
-import android.arch.lifecycle.ViewModel
 import com.kfc.restorater.model.restaurant.Restaurant
 import com.kfc.restorater.repo.api.RestaurantRepo
 import com.kfc.restorater.repo.RetrofitWebServiceGenerator
 import io.reactivex.Observable
 
-class RestaurantViewModel : ViewModel() {
+class RestaurantViewModel {
     val restaurantRepo = RetrofitWebServiceGenerator().createService(RestaurantRepo::class.java)
 
     fun getRestaurants(): Observable<List<Restaurant>>? {
