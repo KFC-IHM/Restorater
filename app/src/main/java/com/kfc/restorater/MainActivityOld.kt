@@ -4,8 +4,8 @@ import android.os.Bundle
 import android.view.Menu
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
-import com.kfc.restorater.repo.api.RestaurantRepo
 import com.kfc.restorater.repo.RetrofitWebServiceGenerator
+import com.kfc.restorater.repo.api.RestaurantRepo
 
 class MainActivityOld : AppCompatActivity() {
 
@@ -31,7 +31,7 @@ class MainActivityOld : AppCompatActivity() {
         }
 
         val webService =
-            RetrofitWebServiceGenerator().createService(RestaurantRepo::class.java)
+            RetrofitWebServiceGenerator.createService(RestaurantRepo::class.java)
     }
 
 

@@ -1,7 +1,7 @@
 package com.kfc.restorater.repo.api
 
-import io.reactivex.Observable
 import com.kfc.restorater.model.review.Review
+import io.reactivex.Observable
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET

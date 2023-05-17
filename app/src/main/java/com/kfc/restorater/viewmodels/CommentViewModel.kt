@@ -6,7 +6,7 @@ import com.kfc.restorater.repo.api.CommentRepo
 import io.reactivex.Observable
 
 class CommentViewModel {
-    val commentRepo = RetrofitWebServiceGenerator().createService(CommentRepo::class.java)
+    val commentRepo = RetrofitWebServiceGenerator.createService(CommentRepo::class.java)
 
     fun getComments(): Observable<List<Comment>>? {
         return commentRepo.getComments()

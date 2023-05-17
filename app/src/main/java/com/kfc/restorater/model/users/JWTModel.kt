@@ -4,7 +4,7 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class JWT(
+data class JWTModel(
     val refresh: String,
     val access: String,
 ) : Parcelable
