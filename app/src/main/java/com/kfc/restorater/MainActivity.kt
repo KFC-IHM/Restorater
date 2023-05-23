@@ -1,60 +1,26 @@
 package com.kfc.restorater
 
-import android.Manifest
-import android.content.pm.PackageManager
 import android.os.Bundle
-import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
+import androidx.navigation.Navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
+import androidx.navigation.ui.NavigationUI.setupWithNavController
+import com.kfc.restorater.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+    private var binding: ActivityMainBinding? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
-        sendNotification(
-            "Connexion réussie",
-            "Vous êtes bien connecté à Restorater !",
-            RestoApplication.CHANNEL_ID,
-            NotificationCompat.PRIORITY_DEFAULT
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding!!.root)
+        val appBarConfiguration: AppBarConfiguration = AppBarConfiguration.Builder(
+            R.id.navigation_list, R.id.navigation_location, R.id.navigation_user
         )
-
-        val listMenu = findViewById<ImageButton>(R.id.list_menu)
-        listMenu.setOnClickListener {
-            setContentView(R.layout.activity_main)
-        }
-
-        val mapMenu = findViewById<ImageButton>(R.id.map_menu)
-        mapMenu.setOnClickListener {
-            //TODO: Change to map activity
-            // setContentView(R.layout.activity_map)
-        }
-
-        val userMenu = findViewById<ImageButton>(R.id.user_menu)
-        userMenu.setOnClickListener {
-            //TODO: Change to user activity
-            // setContentView(R.layout.activity_user)
-        }
+            .build()
+        val navController = findNavController(this, R.id.nav_host_fragment_activity_main)
+        setupActionBarWithNavController(this, navController, appBarConfiguration)
+        setupWithNavController(binding!!.navView, navController)
     }
-
-    private fun sendNotification(title: String, message: String, channelId: String, priority: Int) {
-        val notification = NotificationCompat.Builder(this, channelId)
-            .setSmallIcon(R.drawable.ic_launcher_foreground)
-            .setContentTitle(title)
-            .setContentText(message)
-            .setPriority(priority)
-
-        if (ActivityCompat.checkSelfPermission(
-                this,
-                Manifest.permission.POST_NOTIFICATIONS
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            return
-        }
-        NotificationManagerCompat.from(applicationContext).notify(0, notification.build())
-    }
-
 }
