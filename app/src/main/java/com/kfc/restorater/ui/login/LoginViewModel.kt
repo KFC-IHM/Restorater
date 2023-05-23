@@ -3,10 +3,12 @@ package com.kfc.restorater.ui.login
 import android.util.Log
 import android.util.Patterns
 import androidx.databinding.BaseObservable
+import androidx.databinding.Observable
 import androidx.databinding.ObservableField
 import com.kfc.restorater.data.LoginRepository
 import com.kfc.restorater.model.users.ApiErrorAuth
 import com.kfc.restorater.repo.RetrofitWebServiceGenerator
+import io.reactivex.disposables.Disposable
 
 class LoginViewModel(private val loginRepository: LoginRepository) : BaseObservable() {
 
@@ -22,12 +24,13 @@ class LoginViewModel(private val loginRepository: LoginRepository) : BaseObserva
 
     var valid = ObservableField<Boolean>(false)
 
+    var loginResultDisposable: Disposable? = null
 
     fun login() {
         // can be launched in a separate asynchronous job
         loading.set(true)
         Log.d("LoginViewModel", "login: ${username.get()}")
-        loginRepository.login(username.get()!!, password.get()!!)
+         loginResultDisposable =  loginRepository.login(username.get()!!, password.get()!!)
             .subscribe(
                 { user ->
                     if (user != null) {
@@ -69,5 +72,10 @@ class LoginViewModel(private val loginRepository: LoginRepository) : BaseObserva
     // A placeholder password validation check
     private fun isPasswordValid(password: String): Boolean {
         return password.length > 2
+    }
+
+    override fun removeOnPropertyChangedCallback(callback: Observable.OnPropertyChangedCallback) {
+        super.removeOnPropertyChangedCallback(callback)
+        loginResultDisposable?.dispose()
     }
 }
