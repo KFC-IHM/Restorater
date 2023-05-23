@@ -27,6 +27,17 @@ class LoginFragment : Fragment() {
         binding.viewmodel = loginViewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
+        // When user is logged in, redirect to user (@+id/navigation_user)
+        loginViewModel.success.addOnPropertyChangedCallback(object :
+            androidx.databinding.Observable.OnPropertyChangedCallback() {
+            override fun onPropertyChanged(sender: androidx.databinding.Observable?, propertyId: Int) {
+                if (loginViewModel.success.get() == true) {
+                    // redirect to user (@+id/navigation_user)
+                    androidx.navigation.Navigation.findNavController(requireActivity(), com.kfc.restorater.R.id.nav_host_fragment_activity_main).navigate(com.kfc.restorater.R.id.navigation_user)
+                }
+            }
+        })
+
         return binding.root
 
     }
