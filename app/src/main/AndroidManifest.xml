@@ -16,13 +16,8 @@
         android:theme="@style/Theme.Restorater"
         tools:targetApi="31">
         <activity
-            android:name=".UserActivity"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivityOld"
-            android:exported="true"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.Restorater.NoActionBar">
+            android:name=".MainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
