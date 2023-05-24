@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation.findNavController
 import com.kfc.restorater.R
 import com.kfc.restorater.databinding.FragmentUserBinding
-import com.kfc.restorater.ui.login.ViewModelFactory
+import com.kfc.restorater.factory.ViewModelFactory
 
 class UserFragment : Fragment() {
 

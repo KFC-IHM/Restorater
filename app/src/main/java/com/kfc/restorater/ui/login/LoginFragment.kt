@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.kfc.restorater.databinding.FragmentLoginBinding
+import com.kfc.restorater.factory.ViewModelFactory
 
 class LoginFragment : Fragment() {
 

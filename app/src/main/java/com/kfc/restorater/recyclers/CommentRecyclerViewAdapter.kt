@@ -4,38 +4,31 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 
-import com.kfc.restorater.recyclers.placeholder.PlaceholderContent.PlaceholderItem
 import com.kfc.restorater.databinding.FragmentCommentBinding
+import com.kfc.restorater.model.review.Review
 
-/**
- * [RecyclerView.Adapter] that can display a [PlaceholderItem].
- * TODO: Replace the implementation with code for your data type.
- */
-class CommentRecyclerViewAdapter(
-        private val values: List<PlaceholderItem>)
+
+class CommentRecyclerViewAdapter(private val reviews: List<Review>)
     : RecyclerView.Adapter<CommentRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-
-    return ViewHolder(FragmentCommentBinding.inflate(LayoutInflater.from(parent.context), parent, false))
-
+        return ViewHolder(FragmentCommentBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = values[position]
-        //holder.idView.text = item.id
-        //holder.contentView.text = item.content
+        holder.reviewTitle.text = reviews.get(position).title
+        holder.reviewRating.text = reviews.get(position).rating.toString()
     }
 
-    override fun getItemCount(): Int = values.size
+    override fun getItemCount(): Int = reviews.size
 
     inner class ViewHolder(binding: FragmentCommentBinding) : RecyclerView.ViewHolder(binding.root) {
-        //val idView: TextView = binding.itemNumber
-        //val contentView: TextView = binding.content
+        val reviewRating = binding.commentRating
+        val reviewTitle = binding.commentTitle
 
-        //override fun toString(): String {
-        //    return super.toString() + " '" + contentView.text + "'"
-        //}
+        override fun toString(): String {
+            return super.toString() + " '" + reviewTitle + " <" + reviewRating + "stars>'"
+        }
     }
 
 }
