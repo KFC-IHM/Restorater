@@ -1,11 +1,14 @@
 package com.kfc.restorater.data
 
+import android.util.Log
 import androidx.databinding.ObservableField
 import com.auth0.android.jwt.JWT
 import com.kfc.restorater.data.model.LoggedInUser
 import com.kfc.restorater.model.users.Credentials
+import com.kfc.restorater.model.users.User
 import com.kfc.restorater.repo.RetrofitWebServiceGenerator
 import com.kfc.restorater.repo.api.RetrofitAuthApi
+import com.kfc.restorater.repo.api.UserRepo
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -20,6 +23,8 @@ class LoginRepository {
         RetrofitAuthApi::class.java
     )
     val user = ObservableField<LoggedInUser>()
+    val userData = ObservableField<User>()
+    val userWebService = RetrofitWebServiceGenerator.createService(UserRepo::class.java)
 
     fun login(username: String, password: String): Single<ObservableField<LoggedInUser>> {
         val credentials = Credentials(username, password)
@@ -31,6 +36,20 @@ class LoginRepository {
                 val userId = decodedJWT.getClaim("user_id").asInt()
                 if (userId != null) {
                     user.set(LoggedInUser(userId, jwt))
+                    user.get()?.let {
+                        userWebService.getUser(it.userId)
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe(
+                                { user ->
+                                    userData.set(user)
+                                },
+                                { _ ->
+                                    userData.set(null)
+                                    Log.d("LoginRepository", "login: critical error")
+                                }
+                            )
+                    }
                     return@map user
                 } else {
                     // error

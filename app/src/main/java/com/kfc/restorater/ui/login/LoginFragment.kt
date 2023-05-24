@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.kfc.restorater.databinding.FragmentLoginBinding
+import com.kfc.restorater.factory.ViewModelFactory
 
 class LoginFragment : Fragment() {
 
@@ -26,6 +27,17 @@ class LoginFragment : Fragment() {
         loginViewModel = ViewModelFactory.create(LoginViewModel::class.java)
         binding.viewmodel = loginViewModel
         binding.lifecycleOwner = viewLifecycleOwner
+
+        // When user is logged in, redirect to user (@+id/navigation_user)
+        loginViewModel.success.addOnPropertyChangedCallback(object :
+            androidx.databinding.Observable.OnPropertyChangedCallback() {
+            override fun onPropertyChanged(sender: androidx.databinding.Observable?, propertyId: Int) {
+                if (loginViewModel.success.get() == true) {
+                    // redirect to user (@+id/navigation_user)
+                    androidx.navigation.Navigation.findNavController(requireActivity(), com.kfc.restorater.R.id.nav_host_fragment_activity_main).navigate(com.kfc.restorater.R.id.navigation_user)
+                }
+            }
+        })
 
         return binding.root
 
