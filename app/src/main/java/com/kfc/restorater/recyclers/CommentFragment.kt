@@ -8,16 +8,11 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kfc.restorater.R
-import com.kfc.restorater.model.review.Review
 import com.kfc.restorater.factory.ViewModelFactory
 
 class CommentFragment : Fragment() {
 
     private lateinit var commentViewModel: CommentViewModel
-
-    private var displayedReviews: List<Review> = listOf(
-        Review(1, "Good", "Good", 5, 1, 1)
-    )
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,13 +26,19 @@ class CommentFragment : Fragment() {
         if (view is RecyclerView) {
             with(view) {
                 layoutManager = LinearLayoutManager(context)
-                val reviews = commentViewModel.loginRepository.userData.get()?.review_set
 
-                if (reviews != null) {
-                    displayedReviews = reviews
-                }
-
-                adapter = CommentRecyclerViewAdapter(displayedReviews)
+                // When the user data is updated, update the adapter (reviews)
+                commentViewModel.loginRepository.userData.addOnPropertyChangedCallback(object :
+                    androidx.databinding.Observable.OnPropertyChangedCallback() {
+                    override fun onPropertyChanged(
+                        sender: androidx.databinding.Observable?,
+                        propertyId: Int
+                    ) {
+                        commentViewModel.loginRepository.userData.get()?.let {
+                            adapter = CommentRecyclerViewAdapter(it.review_set)
+                        }
+                    }
+                })
             }
         }
 
