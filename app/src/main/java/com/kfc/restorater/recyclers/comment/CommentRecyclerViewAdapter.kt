@@ -1,4 +1,4 @@
-package com.kfc.restorater.recyclers
+package com.kfc.restorater.recyclers.comment
 
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater

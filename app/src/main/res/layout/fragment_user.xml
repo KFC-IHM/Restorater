@@ -43,7 +43,7 @@
 
         <fragment
             android:id="@+id/comment_list"
-            android:name="com.kfc.restorater.recyclers.CommentFragment"
+            android:name="com.kfc.restorater.recyclers.comment.CommentFragment"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"

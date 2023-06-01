@@ -17,4 +17,10 @@
         android:label="@string/user"
         tools:layout="@layout/fragment_user" />
 
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.kfc.restorater.ui.home.HomeFragment"
+        android:label="@string/user"
+        tools:layout="@layout/fragment_home" />
 </navigation>

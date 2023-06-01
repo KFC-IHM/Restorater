@@ -2,7 +2,7 @@ package com.kfc.restorater.factory
 
 import androidx.databinding.BaseObservable
 import com.kfc.restorater.data.LoginRepository
-import com.kfc.restorater.recyclers.CommentViewModel
+import com.kfc.restorater.recyclers.comment.CommentViewModel
 import com.kfc.restorater.ui.login.LoginViewModel
 import com.kfc.restorater.ui.user.UserViewModel
 
