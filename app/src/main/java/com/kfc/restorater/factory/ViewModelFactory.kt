@@ -33,9 +33,7 @@ class ViewModelFactory {
                 ) as T
             }
             if (modelClass.isAssignableFrom(RestaurantViewModel::class.java)) {
-                return RestaurantViewModel(
-                    loginRepository = loginRepository
-                ) as T
+                return RestaurantViewModel() as T
             }
             throw IllegalArgumentException("Unknown ViewModel class")
         }
