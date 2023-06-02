@@ -1,5 +1,6 @@
 package com.kfc.restorater.recyclers.restorant
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -15,6 +16,7 @@ class RestorantRecyclerViewAdapter(private val restaurants: List<Restaurant>) :
     }
 
     override fun onBindViewHolder(holder: RestorantRecyclerViewAdapter.ViewHolder, position: Int) {
+        Log.d("RestorantRecyclerViewAdapter", "onBindViewHolder: " + restaurants.get(position).name)
         holder.restaurantName.text = restaurants.get(position).name
         holder.restaurantRating.text = restaurants.get(position).rating().toString()
     }
