@@ -3,6 +3,7 @@ package com.kfc.restorater.factory
 import androidx.databinding.BaseObservable
 import com.kfc.restorater.data.LoginRepository
 import com.kfc.restorater.recyclers.comment.CommentViewModel
+import com.kfc.restorater.recyclers.restorant.RestaurantViewModel
 import com.kfc.restorater.ui.login.LoginViewModel
 import com.kfc.restorater.ui.user.UserViewModel
 
@@ -28,6 +29,11 @@ class ViewModelFactory {
             }
             if (modelClass.isAssignableFrom(CommentViewModel::class.java)) {
                 return CommentViewModel(
+                    loginRepository = loginRepository
+                ) as T
+            }
+            if (modelClass.isAssignableFrom(RestaurantViewModel::class.java)) {
+                return RestaurantViewModel(
                     loginRepository = loginRepository
                 ) as T
             }

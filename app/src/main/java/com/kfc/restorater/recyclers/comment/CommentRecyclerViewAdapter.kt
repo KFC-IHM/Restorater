@@ -1,12 +1,10 @@
 package com.kfc.restorater.recyclers.comment
 
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
-
+import androidx.recyclerview.widget.RecyclerView
 import com.kfc.restorater.databinding.FragmentCommentBinding
 import com.kfc.restorater.model.review.Review
-
 
 class CommentRecyclerViewAdapter(private val reviews: List<Review>)
     : RecyclerView.Adapter<CommentRecyclerViewAdapter.ViewHolder>() {
