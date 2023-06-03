@@ -2,6 +2,7 @@ package com.kfc.restorater.factory
 
 import androidx.databinding.BaseObservable
 import com.kfc.restorater.data.LoginRepository
+import com.kfc.restorater.data.RestaurantRepository
 import com.kfc.restorater.recyclers.comment.CommentViewModel
 import com.kfc.restorater.recyclers.restaurant.RestaurantViewModel
 import com.kfc.restorater.ui.login.LoginViewModel
@@ -14,6 +15,7 @@ import com.kfc.restorater.ui.user.UserViewModel
 class ViewModelFactory {
     companion object {
         private val loginRepository = LoginRepository()
+        private val restaurantRepository = RestaurantRepository()
 
         @Suppress("UNCHECKED_CAST")
         fun <T : BaseObservable> create(modelClass: Class<T>): T {
@@ -33,7 +35,9 @@ class ViewModelFactory {
                 ) as T
             }
             if (modelClass.isAssignableFrom(RestaurantViewModel::class.java)) {
-                return RestaurantViewModel() as T
+                return RestaurantViewModel(
+                    restaurantRepository = restaurantRepository
+                ) as T
             }
             throw IllegalArgumentException("Unknown ViewModel class")
         }
