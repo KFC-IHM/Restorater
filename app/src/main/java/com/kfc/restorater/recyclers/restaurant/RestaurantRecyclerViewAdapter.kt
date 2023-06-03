@@ -1,24 +1,22 @@
-package com.kfc.restorater.recyclers.restorant
+package com.kfc.restorater.recyclers.restaurant
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.kfc.restorater.databinding.FragmentRestorantBinding
 import com.kfc.restorater.model.restaurant.Restaurant
 
-class RestorantRecyclerViewAdapter(private val restaurants: List<Restaurant>) :
-    RecyclerView.Adapter<RestorantRecyclerViewAdapter.ViewHolder>() {
+class RestaurantRecyclerViewAdapter(private val restaurants: List<Restaurant>) :
+    RecyclerView.Adapter<RestaurantRecyclerViewAdapter.ViewHolder>() {
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RestorantRecyclerViewAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RestaurantRecyclerViewAdapter.ViewHolder {
         return ViewHolder(FragmentRestorantBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
 
-    override fun onBindViewHolder(holder: RestorantRecyclerViewAdapter.ViewHolder, position: Int) {
-        Log.d("RestorantRecyclerViewAdapter", "onBindViewHolder: " + restaurants.get(position).name)
-        holder.restaurantName.text = restaurants.get(position).name
-        holder.restaurantRating.text = restaurants.get(position).rating().toString()
+    override fun onBindViewHolder(holder: RestaurantRecyclerViewAdapter.ViewHolder, position: Int) {
+        holder.restaurantName.text = restaurants[position].name
+        holder.restaurantRating.text = restaurants[position].rating().toString()
     }
 
     override fun getItemCount(): Int = restaurants.size

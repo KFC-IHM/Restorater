@@ -1,4 +1,4 @@
-package com.kfc.restorater.recyclers.restorant
+package com.kfc.restorater.recyclers.restaurant
 
 import androidx.databinding.BaseObservable
 import androidx.databinding.ObservableField
@@ -11,14 +11,19 @@ import io.reactivex.schedulers.Schedulers
 class RestaurantViewModel() : BaseObservable() {
     var restaurants: ObservableField<List<Restaurant>> = ObservableField()
 
+    private val restorantWebService: RestaurantRepo = RetrofitWebServiceGenerator.createService(RestaurantRepo::class.java)
+
     init {
-        RetrofitWebServiceGenerator
-            .createService(RestaurantRepo::class.java)
-            .getRestaurants()
+        restorantWebService.getRestaurants()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .map { restaurants ->
-                this.restaurants.set(restaurants)
-            }
+            .subscribe(
+                { restaurants ->
+                    this.restaurants.set(restaurants)
+                },
+                { _ ->
+                    this.restaurants.set(null)
+                }
+            )
     }
 }

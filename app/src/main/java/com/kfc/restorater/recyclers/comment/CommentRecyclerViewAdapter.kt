@@ -14,8 +14,8 @@ class CommentRecyclerViewAdapter(private val reviews: List<Review>)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.reviewTitle.text = reviews.get(position).title
-        holder.reviewRating.text = reviews.get(position).rating.toString()
+        holder.reviewTitle.text = reviews[position].title
+        holder.reviewRating.text = reviews[position].rating.toString()
     }
 
     override fun getItemCount(): Int = reviews.size

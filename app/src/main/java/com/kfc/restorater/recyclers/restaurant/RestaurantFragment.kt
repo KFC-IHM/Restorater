@@ -1,4 +1,4 @@
-package com.kfc.restorater.recyclers.restorant
+package com.kfc.restorater.recyclers.restaurant
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,7 +13,7 @@ import com.kfc.restorater.factory.ViewModelFactory
 /**
  * A fragment representing a list of Items.
  */
-class RestorantFragment : Fragment() {
+class RestaurantFragment : Fragment() {
 
     private lateinit var restorantViewModel: RestaurantViewModel
 
@@ -30,6 +30,8 @@ class RestorantFragment : Fragment() {
             with(view) {
                 layoutManager = LinearLayoutManager(context)
 
+                adapter = RestaurantRecyclerViewAdapter(restorantViewModel.restaurants.get()?: emptyList())
+
                 // When the restaurant data is updated, update the adapter (restaurants)
                 restorantViewModel.restaurants.addOnPropertyChangedCallback(object :
                     androidx.databinding.Observable.OnPropertyChangedCallback() {
@@ -38,7 +40,7 @@ class RestorantFragment : Fragment() {
                         propertyId: Int
                     ) {
                         restorantViewModel.restaurants.get()?.let {
-                            adapter = RestorantRecyclerViewAdapter(it)
+                            adapter = RestaurantRecyclerViewAdapter(it)
                         }
                     }
                 })
