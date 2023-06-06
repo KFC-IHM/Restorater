@@ -3,6 +3,7 @@ package com.kfc.restorater.ui.location
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
+import android.location.Location
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -18,12 +19,20 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
 import com.kfc.restorater.R
+import com.kfc.restorater.model.restaurant.Restaurant
+import com.kfc.restorater.repo.RetrofitWebServiceGenerator
+import com.kfc.restorater.repo.api.RestaurantRepo
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 
 
 class LocationFragment : Fragment() {
     private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private val restaurantRepo: RestaurantRepo =
+        RetrofitWebServiceGenerator.createService(
+            RestaurantRepo::class.java
+        )
 
     private fun getLocation(callback: (LatLng) -> Unit) {
         if (ActivityCompat.checkSelfPermission(
@@ -46,17 +55,62 @@ class LocationFragment : Fragment() {
             }
     }
 
+    private fun distanceBetween(
+        position: LatLng,
+        restaurant: Restaurant
+    ): Float {
+        val distance = FloatArray(1)
+        Location.distanceBetween(
+            position.latitude,
+            position.longitude,
+            restaurant.latitude,
+            restaurant.longitude,
+            distance
+        )
+        return distance[0]
+    }
+
+    private fun getClosestRestaurant(currentLatLng: LatLng, callback: (List<Restaurant>) -> Unit) {
+        restaurantRepo.getRestaurants()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe { restaurants ->
+                val closestRestaurants = restaurants
+                    .sortedBy { distanceBetween(currentLatLng, it) }
+                    .take(10)
+
+                callback(closestRestaurants)
+            }
+    }
 
     @SuppressLint("MissingPermission")
     private val callback = OnMapReadyCallback { googleMap ->
         Log.e("LocationFragment", "callback")
 
-
         getLocation { currentLatLng: LatLng ->
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 13f))
+
             googleMap.addMarker(
-                MarkerOptions().position(currentLatLng).title("Current Location")
+                com.google.android.gms.maps.model.MarkerOptions()
+                    .position(currentLatLng)
+                    .title("You are here")
+                    // blue marker
+                    .icon(
+                        com.google.android.gms.maps.model.BitmapDescriptorFactory.defaultMarker(
+                            com.google.android.gms.maps.model.BitmapDescriptorFactory.HUE_AZURE
+                        )
+                    )
             )
-            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 20f))
+
+            getClosestRestaurant(currentLatLng) { restaurants ->
+                restaurants.forEach { restaurant ->
+                    googleMap.addMarker(
+                        com.google.android.gms.maps.model.MarkerOptions()
+                            .position(restaurant.toLatLng())
+                            .title(restaurant.name)
+                    )
+                }
+            }
         }
     }
 
