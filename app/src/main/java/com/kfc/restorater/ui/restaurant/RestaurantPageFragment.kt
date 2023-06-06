@@ -28,13 +28,7 @@ class RestaurantPageFragment : Fragment() {
         _binding = FragmentRestaurantPageBinding.inflate(inflater, container, false)
         restaurantViewModel = ViewModelFactory.create(RestaurantPageViewModel::class.java)
         binding.restaurantName.text = restaurantViewModel.restaurantRepository.currentRestaurant.get()?.name
-
-        restaurantViewModel.restaurantRepository.currentRestaurant.addOnPropertyChangedCallback(object :
-            androidx.databinding.Observable.OnPropertyChangedCallback() {
-            override fun onPropertyChanged(sender: androidx.databinding.Observable?, propertyId: Int) {
-                binding.restaurantName.text = restaurantViewModel.restaurantRepository.currentRestaurant.get()?.name
-            }
-        })
+        binding.restaurantRating.text = restaurantViewModel.restaurantRepository.currentRestaurant.get()?.rating().toString()
 
         return binding.root
 
