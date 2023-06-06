@@ -1,6 +1,7 @@
 package com.kfc.restorater.recyclers.restaurantComments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,6 +24,7 @@ class RestaurantCommentFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_restaurant_comment_list, container, false)
+        Log.d("RestaurantCommentFragment", "onCreateView")
 
         restaurantCommentViewModel = ViewModelFactory.create(RestaurantCommentViewModel::class.java)
 

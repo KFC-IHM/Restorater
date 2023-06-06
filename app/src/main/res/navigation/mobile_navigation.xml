@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/navigation_login"
         android:name="com.kfc.restorater.ui.login.LoginFragment"
-        android:label="@string/user"
+        android:label="@string/login"
         tools:layout="@layout/fragment_login" />
 
     <fragment
@@ -17,16 +17,21 @@
         android:label="@string/user"
         tools:layout="@layout/fragment_user" />
 
+    <!--<fragment
+        android:id="@+id/navigation_location"
+        android:name="com.kfc.restorater.ui.map.MapFragment"
+        android:label="@string/map"
+        tools:layout="@layout/fragment_map" />-->
 
     <fragment
         android:id="@+id/navigation_home"
         android:name="com.kfc.restorater.ui.home.HomeFragment"
-        android:label="@string/user"
+        android:label="Home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/navigation_restaurant"
         android:name="com.kfc.restorater.ui.restaurant.RestaurantFragment"
-        android:label="@string/user"
+        android:label="Restaurant"
         tools:layout="@layout/fragment_restaurant_page" />
 </navigation>
