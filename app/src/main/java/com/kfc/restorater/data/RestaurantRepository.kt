@@ -27,18 +27,30 @@ class RestaurantRepository {
             )
     }
 
-    fun getRestaurant(id: Int) {
+    fun getRestaurant(id: Int) : ObservableField<Restaurant> {
+        val returnRestaurant: ObservableField<Restaurant> = ObservableField()
+
         restorantWebService.getRestaurant(id)
             .subscribeOn(io.reactivex.schedulers.Schedulers.io())
             .observeOn(io.reactivex.android.schedulers.AndroidSchedulers.mainThread())
             .subscribe(
                 { restaurant ->
-                    this.currentRestaurant.set(restaurant)
+                    returnRestaurant.set(restaurant)
                 },
                 { _ ->
-                    this.currentRestaurant.set(null)
+                    returnRestaurant.set(null)
                 }
             )
+
+        return returnRestaurant
+    }
+
+    fun setCurrentRestaurant(restaurant: Restaurant) {
+        currentRestaurant.set(restaurant)
+    }
+
+    fun setCurrentRestaurant(id: Int) {
+        currentRestaurant.set(getRestaurant(id).get())
     }
 
     fun getCurrentRestaurant(): ObservableField<Restaurant> {

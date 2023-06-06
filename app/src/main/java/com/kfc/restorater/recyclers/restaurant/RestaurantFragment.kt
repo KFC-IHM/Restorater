@@ -22,7 +22,7 @@ class RestaurantFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_restorant_list, container, false)
+        val view = inflater.inflate(R.layout.fragment_restaurant_list, container, false)
 
         restorantViewModel = ViewModelFactory.create(RestaurantViewModel::class.java)
 

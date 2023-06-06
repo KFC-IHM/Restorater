@@ -28,6 +28,8 @@ class LoginFragment : Fragment() {
         binding.viewmodel = loginViewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
+        //TODO
+
         // When user is logged in, redirect to user (@+id/navigation_user)
         loginViewModel.success.addOnPropertyChangedCallback(object :
             androidx.databinding.Observable.OnPropertyChangedCallback() {
