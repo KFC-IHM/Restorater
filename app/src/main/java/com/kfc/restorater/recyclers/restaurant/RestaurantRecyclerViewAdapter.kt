@@ -1,5 +1,6 @@
 package com.kfc.restorater.recyclers.restaurant
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.findNavController
@@ -40,6 +41,7 @@ class RestaurantRecyclerViewAdapter(private val restaurantRepository: Restaurant
 
         holder.itemView.setOnClickListener { view ->
             restaurantRepository.setCurrentRestaurant(restaurants[position])
+            Log.d("RestaurantRecyclerViewAdapter", "Current restaurant: ${restaurantRepository.currentRestaurant.get()?.name}")
             view.findNavController().navigate(R.id.navigation_restaurant)
         }
     }

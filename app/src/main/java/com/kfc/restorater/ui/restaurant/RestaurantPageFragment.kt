@@ -1,17 +1,18 @@
 package com.kfc.restorater.ui.restaurant
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.kfc.restorater.databinding.FragmentRestaurantBinding
+import com.kfc.restorater.databinding.FragmentRestaurantPageBinding
 import com.kfc.restorater.factory.ViewModelFactory
 
-class RestaurantFragment : Fragment() {
+class RestaurantPageFragment : Fragment() {
 
-    private lateinit var restaurantViewModel: RestaurantViewModel
-    private var _binding: FragmentRestaurantBinding? = null
+    private lateinit var restaurantViewModel: RestaurantPageViewModel
+    private var _binding: FragmentRestaurantPageBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -22,9 +23,10 @@ class RestaurantFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        Log.d("RestaurantPageFragment", "onCreateView")
 
-        _binding = FragmentRestaurantBinding.inflate(inflater, container, false)
-        restaurantViewModel = ViewModelFactory.create(RestaurantViewModel::class.java)
+        _binding = FragmentRestaurantPageBinding.inflate(inflater, container, false)
+        restaurantViewModel = ViewModelFactory.create(RestaurantPageViewModel::class.java)
         binding.restaurantName.text = restaurantViewModel.restaurantRepository.currentRestaurant.get()?.name
 
         restaurantViewModel.restaurantRepository.currentRestaurant.addOnPropertyChangedCallback(object :

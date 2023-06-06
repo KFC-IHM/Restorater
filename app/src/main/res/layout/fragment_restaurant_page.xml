@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewmodel"
-            type="com.kfc.restorater.ui.restaurant.RestaurantViewModel" />
+            type="com.kfc.restorater.ui.restaurant.RestaurantPageViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

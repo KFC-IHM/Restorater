@@ -1,5 +1,6 @@
 package com.kfc.restorater.data
 
+import android.util.Log
 import androidx.databinding.ObservableField
 import com.kfc.restorater.model.restaurant.Restaurant
 import com.kfc.restorater.repo.RetrofitWebServiceGenerator
@@ -46,6 +47,7 @@ class RestaurantRepository {
     }
 
     fun setCurrentRestaurant(restaurant: Restaurant) {
+        Log.d("RestaurantRepository", "setCurrentRestaurant: ${restaurant.name}")
         currentRestaurant.set(restaurant)
     }
 

@@ -31,7 +31,7 @@
 
     <fragment
         android:id="@+id/navigation_restaurant"
-        android:name="com.kfc.restorater.ui.restaurant.RestaurantFragment"
+        android:name="com.kfc.restorater.ui.restaurant.RestaurantPageFragment"
         android:label="Restaurant"
         tools:layout="@layout/fragment_restaurant_page" />
 </navigation>

@@ -43,8 +43,8 @@ class ViewModelFactory {
                     restaurantRepository = restaurantRepository
                 ) as T
             }
-            if (modelClass.isAssignableFrom(com.kfc.restorater.ui.restaurant.RestaurantViewModel::class.java)) {
-                return com.kfc.restorater.ui.restaurant.RestaurantViewModel(
+            if (modelClass.isAssignableFrom(com.kfc.restorater.ui.restaurant.RestaurantPageViewModel::class.java)) {
+                return com.kfc.restorater.ui.restaurant.RestaurantPageViewModel(
                     restaurantRepository = restaurantRepository
                 ) as T
             }
