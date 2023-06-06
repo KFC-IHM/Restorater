@@ -10,11 +10,11 @@ class RestaurantRepository {
 
     var currentRestaurant: ObservableField<Restaurant> = ObservableField()
 
-    private val restorantWebService: RestaurantRepo = RetrofitWebServiceGenerator.createService(
+    private val restaurantWebService: RestaurantRepo = RetrofitWebServiceGenerator.createService(
         RestaurantRepo::class.java)
 
     init {
-        restorantWebService.getRestaurants()
+        restaurantWebService.getRestaurants()
             .subscribeOn(io.reactivex.schedulers.Schedulers.io())
             .observeOn(io.reactivex.android.schedulers.AndroidSchedulers.mainThread())
             .subscribe(
@@ -30,7 +30,7 @@ class RestaurantRepository {
     fun getRestaurant(id: Int) : ObservableField<Restaurant> {
         val returnRestaurant: ObservableField<Restaurant> = ObservableField()
 
-        restorantWebService.getRestaurant(id)
+        restaurantWebService.getRestaurant(id)
             .subscribeOn(io.reactivex.schedulers.Schedulers.io())
             .observeOn(io.reactivex.android.schedulers.AndroidSchedulers.mainThread())
             .subscribe(
@@ -51,10 +51,6 @@ class RestaurantRepository {
 
     fun setCurrentRestaurant(id: Int) {
         currentRestaurant.set(getRestaurant(id).get())
-    }
-
-    fun getCurrentRestaurant(): ObservableField<Restaurant> {
-        return currentRestaurant
     }
 
 }

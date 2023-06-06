@@ -3,7 +3,7 @@ package com.kfc.restorater.recyclers.restaurant
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.kfc.restorater.databinding.FragmentRestorantBinding
+import com.kfc.restorater.databinding.FragmentRestaurantBinding
 import com.kfc.restorater.model.restaurant.Restaurant
 
 class RestaurantRecyclerViewAdapter(private val restaurants: List<Restaurant>) :
@@ -11,7 +11,7 @@ class RestaurantRecyclerViewAdapter(private val restaurants: List<Restaurant>) :
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RestaurantRecyclerViewAdapter.ViewHolder {
-        return ViewHolder(FragmentRestorantBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+        return ViewHolder(FragmentRestaurantBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
 
     override fun onBindViewHolder(holder: RestaurantRecyclerViewAdapter.ViewHolder, position: Int) {
@@ -21,7 +21,7 @@ class RestaurantRecyclerViewAdapter(private val restaurants: List<Restaurant>) :
 
     override fun getItemCount(): Int = restaurants.size
 
-    inner class ViewHolder(binding: FragmentRestorantBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class ViewHolder(binding: FragmentRestaurantBinding) : RecyclerView.ViewHolder(binding.root) {
         val restaurantName = binding.restaurantName
         val restaurantRating = binding.restaurantRating
 
