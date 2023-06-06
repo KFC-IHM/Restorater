@@ -52,5 +52,4 @@ class RestaurantRepository {
     fun setCurrentRestaurant(id: Int) {
         currentRestaurant.set(getRestaurant(id).get())
     }
-
 }

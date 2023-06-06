@@ -30,20 +30,7 @@ class RestaurantFragment : Fragment() {
             with(view) {
                 layoutManager = LinearLayoutManager(context)
 
-                adapter = RestaurantRecyclerViewAdapter(restorantViewModel.restaurantRepository.restaurants.get()?: emptyList())
-
-                // When the restaurant data is updated, update the adapter (restaurants)
-                restorantViewModel.restaurantRepository.restaurants.addOnPropertyChangedCallback(object :
-                    androidx.databinding.Observable.OnPropertyChangedCallback() {
-                    override fun onPropertyChanged(
-                        sender: androidx.databinding.Observable?,
-                        propertyId: Int
-                    ) {
-                        restorantViewModel.restaurantRepository.restaurants.get()?.let {
-                            adapter = RestaurantRecyclerViewAdapter(it)
-                        }
-                    }
-                })
+                adapter = RestaurantRecyclerViewAdapter(restorantViewModel.restaurantRepository)
             }
         }
 

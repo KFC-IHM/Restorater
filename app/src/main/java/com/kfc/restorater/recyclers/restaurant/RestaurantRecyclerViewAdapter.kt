@@ -5,12 +5,30 @@ import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.kfc.restorater.R
+import com.kfc.restorater.data.RestaurantRepository
 import com.kfc.restorater.databinding.FragmentRestaurantBinding
 import com.kfc.restorater.model.restaurant.Restaurant
 
-class RestaurantRecyclerViewAdapter(private val restaurants: List<Restaurant>) :
+class RestaurantRecyclerViewAdapter(private val restaurantRepository: RestaurantRepository) :
     RecyclerView.Adapter<RestaurantRecyclerViewAdapter.ViewHolder>() {
 
+    var restaurants: List<Restaurant> = restaurantRepository.restaurants.get() ?: emptyList()
+
+    init {
+        // When the restaurant data is updated, update the adapter (restaurants)
+        restaurantRepository.restaurants.addOnPropertyChangedCallback(object :
+            androidx.databinding.Observable.OnPropertyChangedCallback() {
+            override fun onPropertyChanged(
+                sender: androidx.databinding.Observable?,
+                propertyId: Int
+            ) {
+                restaurantRepository.restaurants.get()?.let {
+                    restaurants = it
+                    notifyDataSetChanged() // Notify the adapter about the data change
+                }
+            }
+        })
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RestaurantRecyclerViewAdapter.ViewHolder {
         return ViewHolder(FragmentRestaurantBinding.inflate(LayoutInflater.from(parent.context), parent, false))
@@ -20,7 +38,8 @@ class RestaurantRecyclerViewAdapter(private val restaurants: List<Restaurant>) :
         holder.restaurantName.text = restaurants[position].name
         holder.restaurantRating.text = restaurants[position].rating().toString()
 
-        holder.itemView.setOnClickListener {view ->
+        holder.itemView.setOnClickListener { view ->
+            restaurantRepository.setCurrentRestaurant(restaurants[position])
             view.findNavController().navigate(R.id.navigation_restaurant)
         }
     }
