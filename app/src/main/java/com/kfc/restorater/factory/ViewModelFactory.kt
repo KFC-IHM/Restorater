@@ -48,6 +48,11 @@ class ViewModelFactory {
                     restaurantRepository = restaurantRepository
                 ) as T
             }
+            if (modelClass.isAssignableFrom(com.kfc.restorater.recyclers.restaurantComments.RestaurantCommentViewModel::class.java)) {
+                return com.kfc.restorater.recyclers.restaurantComments.RestaurantCommentViewModel(
+                    restaurantRepository = restaurantRepository
+                ) as T
+            }
             throw IllegalArgumentException("Unknown ViewModel class")
         }
     }
