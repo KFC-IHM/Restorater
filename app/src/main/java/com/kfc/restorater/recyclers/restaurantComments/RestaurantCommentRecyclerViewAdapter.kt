@@ -1,13 +1,15 @@
-package com.kfc.restorater.recyclers.comment
+package com.kfc.restorater.recyclers.restaurantComments
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.kfc.restorater.data.RestaurantRepository
 import com.kfc.restorater.databinding.FragmentCommentBinding
-import com.kfc.restorater.model.review.Review
 
-class CommentRecyclerViewAdapter(private val reviews: List<Review>)
-    : RecyclerView.Adapter<CommentRecyclerViewAdapter.ViewHolder>() {
+
+class RestaurantCommentRecyclerViewAdapter(private val restaurantRepository: RestaurantRepository) : RecyclerView.Adapter<RestaurantCommentRecyclerViewAdapter.ViewHolder>() {
+
+    var reviews = restaurantRepository.currentRestaurant.get()?.review_set ?: emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(FragmentCommentBinding.inflate(LayoutInflater.from(parent.context), parent, false))

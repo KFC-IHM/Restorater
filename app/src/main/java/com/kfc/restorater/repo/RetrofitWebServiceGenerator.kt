@@ -1,5 +1,6 @@
 package com.kfc.restorater.repo
 
+import android.util.Log
 import com.jakewharton.retrofit2.adapter.rxjava2.HttpException
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import com.squareup.moshi.Moshi
@@ -30,6 +31,7 @@ class RetrofitWebServiceGenerator {
             .build()
 
         fun <S> createService(serviceClass: Class<S>?): S {
+            Log.d("RetrofitWebServiceGenerator", "createService: $serviceClass")
             return retrofit.create(serviceClass!!)
         }
 

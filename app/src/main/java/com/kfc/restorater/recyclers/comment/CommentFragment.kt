@@ -27,6 +27,8 @@ class CommentFragment : Fragment() {
             with(view) {
                 layoutManager = LinearLayoutManager(context)
 
+                adapter = CommentRecyclerViewAdapter(commentViewModel.loginRepository.userData.get()?.review_set ?: emptyList())
+
                 // When the user data is updated, update the adapter (reviews)
                 commentViewModel.loginRepository.userData.addOnPropertyChangedCallback(object :
                     androidx.databinding.Observable.OnPropertyChangedCallback() {
