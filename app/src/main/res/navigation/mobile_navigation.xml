@@ -9,13 +9,21 @@
         android:id="@+id/navigation_login"
         android:name="com.kfc.restorater.ui.login.LoginFragment"
         android:label="@string/login"
-        tools:layout="@layout/fragment_login" />
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_navigation_login_to_navigation_home"
+            app:destination="@id/navigation_home" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_user"
         android:name="com.kfc.restorater.ui.user.UserFragment"
         android:label="@string/user"
-        tools:layout="@layout/fragment_user" />
+        tools:layout="@layout/fragment_user" >
+        <action
+            android:id="@+id/action_navigation_user_to_navigation_login"
+            app:destination="@id/navigation_login" />
+    </fragment>
 
     <!--<fragment
         android:id="@+id/navigation_location"
@@ -27,11 +35,19 @@
         android:id="@+id/navigation_home"
         android:name="com.kfc.restorater.ui.home.HomeFragment"
         android:label="Home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_restaurant"
+            app:destination="@id/navigation_restaurant" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_restaurant"
         android:name="com.kfc.restorater.ui.restaurant.RestaurantPageFragment"
         android:label="Restaurant"
-        tools:layout="@layout/fragment_restaurant_page" />
+        tools:layout="@layout/fragment_restaurant_page" >
+        <action
+            android:id="@+id/action_navigation_restaurant_to_navigation_home"
+            app:destination="@id/navigation_home"/>
+    </fragment>
 </navigation>

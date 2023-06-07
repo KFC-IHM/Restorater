@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.kfc.restorater.R
 import com.kfc.restorater.databinding.FragmentLoginBinding
 import com.kfc.restorater.factory.ViewModelFactory
 
@@ -35,8 +37,8 @@ class LoginFragment : Fragment() {
             androidx.databinding.Observable.OnPropertyChangedCallback() {
             override fun onPropertyChanged(sender: androidx.databinding.Observable?, propertyId: Int) {
                 if (loginViewModel.success.get() == true) {
-                    // redirect to user (@+id/navigation_user)
-                    androidx.navigation.Navigation.findNavController(requireActivity(), com.kfc.restorater.R.id.nav_host_fragment_activity_main).navigate(com.kfc.restorater.R.id.navigation_user)
+                    // redirect to user (@+id/navigation_user) (action_navigation_login_to_navigation_home)
+                    findNavController().navigate(R.id.action_navigation_login_to_navigation_home)
                 }
             }
         })

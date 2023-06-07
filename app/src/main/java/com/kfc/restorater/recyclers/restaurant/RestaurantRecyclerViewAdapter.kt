@@ -1,5 +1,6 @@
 package com.kfc.restorater.recyclers.restaurant
 
+import android.annotation.SuppressLint
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -19,6 +20,7 @@ class RestaurantRecyclerViewAdapter(private val restaurantRepository: Restaurant
         // When the restaurant data is updated, update the adapter (restaurants)
         restaurantRepository.restaurants.addOnPropertyChangedCallback(object :
             androidx.databinding.Observable.OnPropertyChangedCallback() {
+            @SuppressLint("NotifyDataSetChanged")
             override fun onPropertyChanged(
                 sender: androidx.databinding.Observable?,
                 propertyId: Int
@@ -42,7 +44,7 @@ class RestaurantRecyclerViewAdapter(private val restaurantRepository: Restaurant
         holder.itemView.setOnClickListener { view ->
             restaurantRepository.setCurrentRestaurant(restaurants[position])
             Log.d("RestaurantRecyclerViewAdapter", "Current restaurant: ${restaurantRepository.currentRestaurant.get()?.name}")
-            view.findNavController().navigate(R.id.navigation_restaurant)
+            view.findNavController().navigate(R.id.action_navigation_home_to_navigation_restaurant)
         }
     }
 
