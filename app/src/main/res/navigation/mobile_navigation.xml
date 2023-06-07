@@ -12,6 +12,11 @@
         tools:layout="@layout/fragment_login" />
 
     <fragment
+        android:id="@+id/navigation_location"
+        android:name="com.kfc.restorater.ui.location.LocationFragment"
+        tools:layout="@layout/fragment_location" />
+
+    <fragment
         android:id="@+id/navigation_user"
         android:name="com.kfc.restorater.ui.user.UserFragment"
         android:label="@string/user"
