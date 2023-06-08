@@ -12,7 +12,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 
 const val API_BASE_URL = "https://restorater.ozeliurs.com/api/"
 
-class RetrofitWebServiceGenerator {
+class RetrofitWebServiceFactory {
     companion object {
 
 
@@ -30,7 +30,7 @@ class RetrofitWebServiceGenerator {
             .client(httpClient.build())
             .build()
 
-        fun <S> createService(serviceClass: Class<S>?): S {
+        fun <S> build(serviceClass: Class<S>?): S {
             Log.d("RetrofitWebServiceGenerator", "createService: $serviceClass")
             return retrofit.create(serviceClass!!)
         }

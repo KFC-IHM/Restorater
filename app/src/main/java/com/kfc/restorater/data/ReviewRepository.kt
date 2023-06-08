@@ -2,13 +2,13 @@ package com.kfc.restorater.data
 
 import androidx.databinding.ObservableField
 import com.kfc.restorater.model.review.Review
-import com.kfc.restorater.repo.RetrofitWebServiceGenerator
+import com.kfc.restorater.repo.RetrofitWebServiceFactory
 import com.kfc.restorater.repo.api.ReviewRepo
 
 class ReviewRepository {
     var currentReview: ObservableField<Review> = ObservableField()
 
-    private val ratingWebService: ReviewRepo = RetrofitWebServiceGenerator.createService(
+    private val ratingWebService: ReviewRepo = RetrofitWebServiceFactory.build(
         ReviewRepo::class.java)
 
     fun getReview(id: Int) : ObservableField<Review> {

@@ -21,7 +21,7 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.kfc.restorater.R
 import com.kfc.restorater.model.restaurant.Restaurant
-import com.kfc.restorater.repo.RetrofitWebServiceGenerator
+import com.kfc.restorater.repo.RetrofitWebServiceFactory
 import com.kfc.restorater.repo.api.RestaurantRepo
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -30,7 +30,7 @@ import io.reactivex.schedulers.Schedulers
 class LocationFragment : Fragment() {
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private val restaurantRepo: RestaurantRepo =
-        RetrofitWebServiceGenerator.createService(
+        RetrofitWebServiceFactory.build(
             RestaurantRepo::class.java
         )
 
