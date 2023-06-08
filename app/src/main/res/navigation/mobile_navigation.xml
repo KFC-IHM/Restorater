@@ -28,6 +28,9 @@
         <action
             android:id="@+id/action_navigation_user_to_navigation_login"
             app:destination="@id/navigation_login" />
+        <action
+            android:id="@+id/action_navigation_user_to_navigation_comment_page"
+            app:destination="@id/navigation_comment_page" />
     </fragment>
 
     <!--<fragment
@@ -54,5 +57,16 @@
         <action
             android:id="@+id/action_navigation_restaurant_to_navigation_home"
             app:destination="@id/navigation_home"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_comment_page"
+        android:name="com.kfc.restorater.ui.comment.CommentPageFragment"
+        android:label="Comment"
+        tools:layout="@layout/fragment_comment_page" >
+
+        <action
+            android:id="@+id/action_navigation_comment_page_to_navigation_user"
+            app:destination="@id/navigation_user" />
     </fragment>
 </navigation>

@@ -1,12 +1,17 @@
 package com.kfc.restorater.recyclers.comment
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.kfc.restorater.R
+import com.kfc.restorater.data.LoginRepository
+import com.kfc.restorater.data.RestaurantRepository
 import com.kfc.restorater.databinding.FragmentCommentBinding
 import com.kfc.restorater.model.review.Review
 
-class CommentRecyclerViewAdapter(private val reviews: List<Review>)
+class CommentRecyclerViewAdapter(private val reviews: List<Review>,private val loginRepository: LoginRepository)
     : RecyclerView.Adapter<CommentRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -19,6 +24,11 @@ class CommentRecyclerViewAdapter(private val reviews: List<Review>)
         // if NaN hide the rating
         if (reviews[position].rating == 0) {
             holder.reviewRating.text = "No rating"
+        }
+        holder.itemView.setOnClickListener { view ->
+            loginRepository.setCurrentReview(reviews[position])
+            Log.d("RestaurantRecyclerViewAdapter", "Current restaurant: ${loginRepository.review.get()?.title}")
+            view.findNavController().navigate(R.id.action_navigation_user_to_navigation_comment_page)
         }
     }
 
