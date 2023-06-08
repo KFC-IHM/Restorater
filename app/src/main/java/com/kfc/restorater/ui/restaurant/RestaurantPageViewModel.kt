@@ -11,6 +11,7 @@ class RestaurantPageViewModel(val restaurantRepository: RestaurantRepository) : 
 
     var restaurant = ObservableField(restaurantRepository.currentRestaurant.get())
     var context: Context? = null
+    var distance = ObservableField("")
 
     companion object {
         var intent = Intent(ContactsContract.Intents.Insert.ACTION)
@@ -30,7 +31,7 @@ class RestaurantPageViewModel(val restaurantRepository: RestaurantRepository) : 
         context?.startActivity(intent)
     }
 
-    fun setContext2(context: Context) {
-        this.context = context
+    fun getRating(): String {
+        return restaurant.get()?.rating().toString()
     }
 }
