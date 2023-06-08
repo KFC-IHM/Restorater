@@ -36,7 +36,7 @@ class LocationFragment : Fragment() {
 
     private var currentRestaurant: Restaurant? = null
 
-    private fun getLocation(callback: (LatLng) -> Unit) {
+    fun getLocation(callback: (LatLng) -> Unit) {
         if (ActivityCompat.checkSelfPermission(
                 requireContext(),
                 Manifest.permission.ACCESS_FINE_LOCATION
@@ -57,7 +57,7 @@ class LocationFragment : Fragment() {
             }
     }
 
-    private fun distanceBetween(
+    fun distanceBetween(
         position: LatLng,
         restaurant: Restaurant
     ): Float {

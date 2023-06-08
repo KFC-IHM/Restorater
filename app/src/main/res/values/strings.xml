@@ -22,7 +22,7 @@
     <string name="s_inscrire">S\'inscrire</string>
     <string name="se_connecter">Se Connecter</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="restaurant_distance">0</string>
+    <string name="restaurant_distance">%1$s km</string>
     <string name="restaurant_name">Unknown</string>
     <string name="restaurant_rating">0</string>
     <!-- Strings related to login -->
