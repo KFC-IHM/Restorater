@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewmodel"
             type="com.kfc.restorater.ui.restaurant.RestaurantPageViewModel" />
@@ -13,12 +14,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+
         <TextView
             android:id="@+id/restaurant_name"
             android:layout_width="match_parent"
             android:layout_height="120dp"
             android:gravity="center"
-            android:text="RESTAURANT NAME"
+            android:text="@{viewmodel.restaurant.name}"
             android:textSize="30sp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -36,11 +38,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
-                android:text="@string/_0_0"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:drawableEndCompat="@drawable/star_solid_small"
                 android:drawablePadding="10dp"
+                app:drawableEndCompat="@drawable/star_solid_small"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
@@ -70,8 +71,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@+id/restaurant_map"
-            tools:layout="@layout/fragment_restaurant_comment_list"
-            tools:ignore="FragmentTagUsage" />
+            tools:ignore="FragmentTagUsage"
+            tools:layout="@layout/fragment_restaurant_comment_list" />
+        tools:layout_editor_absoluteX="0dp" />
+
+        <Button
+            android:id="@+id/restaurant_add_contact_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/purple_200"
+            android:onClick="@{() -> viewmodel.addContact()}"
+            android:padding="10dp"
+            android:text="Ajouter au repertoire"
+            android:textColor="@color/white"
+            tools:layout_editor_absoluteX="98dp"
+            tools:layout_editor_absoluteY="449dp" />
 
 
         <ImageButton
@@ -79,12 +93,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            android:src="@drawable/car_solid"
-            android:padding="10dp"
             android:background="@drawable/round"
             android:contentDescription="Open Google Maps"
+            android:padding="10dp"
+            android:src="@drawable/car_solid"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
             tools:ignore="HardcodedText" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -66,6 +66,11 @@ class RestaurantPageFragment : Fragment() {
             binding.restaurantDistance.text =
                 getString(com.kfc.restorater.R.string.restaurant_distance, distanceString)
         }
+        if (container != null) {
+            restaurantViewModel.setContext2(container.context)
+        }
+        binding.viewmodel = restaurantViewModel
+        binding.lifecycleOwner = viewLifecycleOwner
 
         return binding.root
 
