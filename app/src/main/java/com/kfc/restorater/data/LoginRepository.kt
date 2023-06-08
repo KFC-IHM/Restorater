@@ -7,8 +7,8 @@ import com.kfc.restorater.data.model.LoggedInUser
 import com.kfc.restorater.model.users.Credentials
 import com.kfc.restorater.model.users.User
 import com.kfc.restorater.repo.RetrofitWebServiceFactory
-import com.kfc.restorater.repo.api.RetrofitAuthApi
-import com.kfc.restorater.repo.api.UserRepo
+import com.kfc.restorater.repo.api.AuthApi
+import com.kfc.restorater.repo.api.UserApi
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -19,12 +19,12 @@ import io.reactivex.schedulers.Schedulers
  */
 
 class LoginRepository {
-    private var authWebservice: RetrofitAuthApi = RetrofitWebServiceFactory.build(
-        RetrofitAuthApi::class.java
+    private var authWebservice: AuthApi = RetrofitWebServiceFactory.build(
+        AuthApi::class.java
     )
     val user = ObservableField<LoggedInUser>()
     val userData = ObservableField<User>()
-    val userWebService = RetrofitWebServiceFactory.build(UserRepo::class.java)
+    val userWebService = RetrofitWebServiceFactory.build(UserApi::class.java)
 
     fun login(username: String, password: String): Single<ObservableField<LoggedInUser>> {
         val credentials = Credentials(username, password)

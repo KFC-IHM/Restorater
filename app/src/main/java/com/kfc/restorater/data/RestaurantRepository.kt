@@ -4,15 +4,15 @@ import android.util.Log
 import androidx.databinding.ObservableField
 import com.kfc.restorater.model.restaurant.Restaurant
 import com.kfc.restorater.repo.RetrofitWebServiceFactory
-import com.kfc.restorater.repo.api.RestaurantRepo
+import com.kfc.restorater.repo.api.RestaurantApi
 
 class RestaurantRepository {
     var restaurants: ObservableField<List<Restaurant>> = ObservableField()
 
     var currentRestaurant: ObservableField<Restaurant> = ObservableField()
 
-    private val restaurantWebService: RestaurantRepo = RetrofitWebServiceFactory.build(
-        RestaurantRepo::class.java)
+    private val restaurantWebService: RestaurantApi = RetrofitWebServiceFactory.build(
+        RestaurantApi::class.java)
 
     init {
         restaurantWebService.getRestaurants()

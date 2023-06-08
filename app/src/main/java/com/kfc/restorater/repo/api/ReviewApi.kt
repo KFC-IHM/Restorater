@@ -9,7 +9,7 @@ import retrofit2.http.POST
 import retrofit2.http.PUT
 import retrofit2.http.Path
 
-interface ReviewRepo {
+interface ReviewApi {
     @GET("reviews/")
     fun getReviews(): Observable<List<Review>>
 

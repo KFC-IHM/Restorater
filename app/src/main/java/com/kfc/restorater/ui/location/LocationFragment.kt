@@ -22,16 +22,16 @@ import com.google.android.gms.maps.model.LatLng
 import com.kfc.restorater.R
 import com.kfc.restorater.model.restaurant.Restaurant
 import com.kfc.restorater.repo.RetrofitWebServiceFactory
-import com.kfc.restorater.repo.api.RestaurantRepo
+import com.kfc.restorater.repo.api.RestaurantApi
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 
 class LocationFragment : Fragment() {
     private lateinit var fusedLocationClient: FusedLocationProviderClient
-    private val restaurantRepo: RestaurantRepo =
+    private val restaurantApi: RestaurantApi =
         RetrofitWebServiceFactory.build(
-            RestaurantRepo::class.java
+            RestaurantApi::class.java
         )
 
     private var currentRestaurant: Restaurant? = null
@@ -73,7 +73,7 @@ class LocationFragment : Fragment() {
     }
 
     private fun getClosestRestaurant(currentLatLng: LatLng, callback: (List<Restaurant>) -> Unit) {
-        restaurantRepo.getRestaurants()
+        restaurantApi.getRestaurants()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { restaurants ->
