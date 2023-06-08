@@ -32,12 +32,6 @@ class RestaurantPageFragment : Fragment() {
 
         restaurantViewModel = ViewModelFactory.create(RestaurantPageViewModel::class.java)
 
-        binding.restaurantName.text =
-            restaurantViewModel.restaurantRepository.currentRestaurant.get()?.name
-
-        binding.restaurantRating.text =
-            restaurantViewModel.restaurantRepository.currentRestaurant.get()?.rating().toString()
-
         binding.restaurantDriveTo.setOnClickListener { navigateGMaps() }
 
         var map = LocationFragment()
@@ -62,12 +56,10 @@ class RestaurantPageFragment : Fragment() {
 
             val distance = map.distanceBetween(location, restaurant)
             val distanceString = String.format("%.2f", distance / 1000)
-
-            binding.restaurantDistance.text =
-                getString(com.kfc.restorater.R.string.restaurant_distance, distanceString)
+            restaurantViewModel.distance.set(distanceString)
         }
         if (container != null) {
-            restaurantViewModel.setContext2(container.context)
+            restaurantViewModel.context = container.context
         }
         binding.viewmodel = restaurantViewModel
         binding.lifecycleOwner = viewLifecycleOwner

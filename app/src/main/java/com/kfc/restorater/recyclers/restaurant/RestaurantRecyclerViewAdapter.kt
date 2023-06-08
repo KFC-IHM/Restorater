@@ -40,6 +40,10 @@ class RestaurantRecyclerViewAdapter(private val restaurantRepository: Restaurant
     override fun onBindViewHolder(holder: RestaurantRecyclerViewAdapter.ViewHolder, position: Int) {
         holder.restaurantName.text = restaurants[position].name
         holder.restaurantRating.text = restaurants[position].rating().toString()
+        // if NaN hide the rating
+        if (restaurants[position].rating().isNaN()) {
+            holder.restaurantRating.text = "No rating"
+        }
 
         holder.itemView.setOnClickListener { view ->
             restaurantRepository.setCurrentRestaurant(restaurants[position])

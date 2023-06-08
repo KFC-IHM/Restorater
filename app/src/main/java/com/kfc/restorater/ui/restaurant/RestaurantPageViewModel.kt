@@ -15,6 +15,7 @@ class RestaurantPageViewModel(val restaurantRepository: RestaurantRepository) : 
 
     var restaurant = ObservableField(restaurantRepository.currentRestaurant.get())
     var context: Context? = null
+    var distance = ObservableField("")
 
     companion object {
         var intent = Intent(ContactsContract.Intents.Insert.ACTION)
@@ -26,11 +27,17 @@ class RestaurantPageViewModel(val restaurantRepository: RestaurantRepository) : 
 
         intent.type = ContactsContract.RawContacts.CONTENT_TYPE
 
-
         intent.putExtra(ContactsContract.Intents.Insert.NAME, "KFC")
         intent.putExtra(ContactsContract.Intents.Insert.PHONE, "0142578482")
 
         context?.startActivity(intent)
+    }
+
+    fun getRating(): String {
+        if (restaurant.get()?.rating()?.isNaN() == true) {
+            return "No rating"
+        }
+        return restaurant.get()?.rating().toString()
     }
 
     private fun sendNotif() {
@@ -51,7 +58,4 @@ class RestaurantPageViewModel(val restaurantRepository: RestaurantRepository) : 
         notificationManager?.notify(0, notification)
     }
 
-    fun setContext2(context: Context) {
-        this.context = context
-    }
 }
