@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.kfc.restorater.databinding.FragmentRestaurantPageBinding
 import com.kfc.restorater.factory.ViewModelFactory
+import com.kfc.restorater.ui.location.LocationFragment
 
 class RestaurantPageFragment : Fragment() {
 
@@ -38,6 +39,33 @@ class RestaurantPageFragment : Fragment() {
             restaurantViewModel.restaurantRepository.currentRestaurant.get()?.rating().toString()
 
         binding.restaurantDriveTo.setOnClickListener { navigateGMaps() }
+
+        var map = LocationFragment()
+        map.arguments = Bundle().apply {
+            putParcelable(
+                "restaurant",
+                restaurantViewModel.restaurantRepository.currentRestaurant.get()
+            )
+        }
+
+        childFragmentManager.beginTransaction().add(
+            com.kfc.restorater.R.id.restaurant_map,
+            map
+        ).commit()
+
+        map =
+            childFragmentManager.findFragmentById(com.kfc.restorater.R.id.restaurant_map) as LocationFragment
+
+        map.getLocation { location ->
+            val restaurant = restaurantViewModel.restaurantRepository.currentRestaurant.get()
+                ?: return@getLocation
+
+            val distance = map.distanceBetween(location, restaurant)
+            val distanceString = String.format("%.2f", distance / 1000)
+
+            binding.restaurantDistance.text =
+                getString(com.kfc.restorater.R.string.restaurant_distance, distanceString)
+        }
 
         return binding.root
 
