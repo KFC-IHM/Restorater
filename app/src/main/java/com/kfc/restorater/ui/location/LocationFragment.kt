@@ -34,6 +34,8 @@ class LocationFragment : Fragment() {
             RestaurantRepo::class.java
         )
 
+    private var currentRestaurant: Restaurant? = null
+
     private fun getLocation(callback: (LatLng) -> Unit) {
         if (ActivityCompat.checkSelfPermission(
                 requireContext(),
@@ -88,7 +90,9 @@ class LocationFragment : Fragment() {
         Log.e("LocationFragment", "callback")
 
         getLocation { currentLatLng: LatLng ->
-            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 13f))
+
+            val pos = currentRestaurant?.toLatLng() ?: currentLatLng
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(pos, 13f))
 
             googleMap.addMarker(
                 com.google.android.gms.maps.model.MarkerOptions()
@@ -102,7 +106,7 @@ class LocationFragment : Fragment() {
                     )
             )
 
-            getClosestRestaurant(currentLatLng) { restaurants ->
+            getClosestRestaurant(pos) { restaurants ->
                 restaurants.forEach { restaurant ->
                     googleMap.addMarker(
                         com.google.android.gms.maps.model.MarkerOptions()
@@ -142,6 +146,9 @@ class LocationFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
         requestPermissions()
+
+        currentRestaurant = arguments?.getParcelable("restaurant")
+
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(callback)
     }
