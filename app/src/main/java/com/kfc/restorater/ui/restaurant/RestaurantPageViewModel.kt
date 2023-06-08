@@ -1,10 +1,14 @@
 package com.kfc.restorater.ui.restaurant
 
+import android.app.Notification
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
 import android.provider.ContactsContract
 import androidx.databinding.BaseObservable
 import androidx.databinding.ObservableField
+import com.kfc.restorater.R
 import com.kfc.restorater.data.RestaurantRepository
 
 class RestaurantPageViewModel(val restaurantRepository: RestaurantRepository) : BaseObservable() {
@@ -15,16 +19,14 @@ class RestaurantPageViewModel(val restaurantRepository: RestaurantRepository) : 
 
     companion object {
         var intent = Intent(ContactsContract.Intents.Insert.ACTION)
+        const val CHANNEL_ID = "login_notification_channel"
     }
 
     fun addContact() {
-        // ContactsContract permet d'ajouter un contact dans le répertoire du téléphone
-        // Inser.action permet de créer un nouveau contact
+        sendNotif()
 
-        // On précise que l'on veut ajouter un contact de type "personne"
         intent.type = ContactsContract.RawContacts.CONTENT_TYPE
 
-        // On ajoute le nom et le numéro de téléphone avec putExtra
         intent.putExtra(ContactsContract.Intents.Insert.NAME, "KFC")
         intent.putExtra(ContactsContract.Intents.Insert.PHONE, "0142578482")
 
@@ -37,4 +39,23 @@ class RestaurantPageViewModel(val restaurantRepository: RestaurantRepository) : 
         }
         return restaurant.get()?.rating().toString()
     }
+
+    private fun sendNotif() {
+        val channel = NotificationChannel(
+            CHANNEL_ID,
+            "Login Notification",
+            NotificationManager.IMPORTANCE_HIGH
+        )
+
+        val notification = Notification.Builder(context, CHANNEL_ID)
+            .setContentTitle("Contact créé !")
+            .setContentText("Confirmez l'ajout dans vos contacts")
+            .setSmallIcon(R.drawable.ic_launcher_foreground)
+            .build()
+
+        val notificationManager = context?.getSystemService(NotificationManager::class.java)
+        notificationManager?.createNotificationChannel(channel)
+        notificationManager?.notify(0, notification)
+    }
+
 }
