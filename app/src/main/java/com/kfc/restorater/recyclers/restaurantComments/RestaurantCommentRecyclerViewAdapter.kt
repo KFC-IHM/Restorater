@@ -18,6 +18,10 @@ class RestaurantCommentRecyclerViewAdapter(private val restaurantRepository: Res
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.reviewTitle.text = reviews[position].title
         holder.reviewRating.text = reviews[position].rating.toString()
+        // if NaN hide the rating
+        if (reviews[position].rating == 0) {
+            holder.reviewRating.text = "No rating"
+        }
     }
 
     override fun getItemCount(): Int = reviews.size

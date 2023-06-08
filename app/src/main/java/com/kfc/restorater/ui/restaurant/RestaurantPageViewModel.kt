@@ -32,6 +32,9 @@ class RestaurantPageViewModel(val restaurantRepository: RestaurantRepository) : 
     }
 
     fun getRating(): String {
+        if (restaurant.get()?.rating()?.isNaN() == true) {
+            return "No rating"
+        }
         return restaurant.get()?.rating().toString()
     }
 }
