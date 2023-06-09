@@ -28,7 +28,7 @@ interface CommentApi {
         @Body comment: Comment,
     ): Observable<Comment>
 
-    @DELETE("comments/{id}")
+    @DELETE("comments/{id}/")
     fun deleteComment(@Path("id") id: Int): Single<Comment>
 
 }

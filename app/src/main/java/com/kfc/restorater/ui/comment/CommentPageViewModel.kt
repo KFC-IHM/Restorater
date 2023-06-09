@@ -40,14 +40,22 @@ class CommentPageViewModel(val loginRepository: LoginRepository, reviewRepositor
     }
 
     fun deleteComment() {
-        comment.get()!!.id?.let {
-            reviewWebService.deleteReview(it)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe {
-                    Log.d("CommentPageViewModel", "deleteComment: success")
-                    navController?.navigateUp()
-                }
+        try {
+            comment.get()!!.id?.let {
+                reviewWebService.deleteReview(it)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(
+                        { _ ->
+                            Log.d("CommentPageViewModel", "deleteComment: success")
+                        },
+                        { _ ->
+                            Log.d("CommentPageViewModel", "deleteComment: error")
+                        }
+                    )
+            }
+        } finally {
+            navController?.navigateUp()
         }
     }
 }
