@@ -17,13 +17,14 @@
         <EditText
             android:id="@+id/post_comment_title"
             android:layout_width="match_parent"
-            android:layout_height="20dp"
+            android:layout_height="60dp"
             android:layout_margin="20dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/post_comment_content"
             android:autofillHints="Titre du commentaire"
             android:inputType="textCapSentences"
-            android:text="@={viewmodel.commentTitle}"/>
+            android:text="@={viewmodel.commentTitle}"
+            android:background="@drawable/round"/>
 
         <EditText
             android:id="@+id/post_comment_content"
@@ -35,7 +36,9 @@
             android:autofillHints="Commentaire"
             android:inputType="textCapSentences|textMultiLine"
             tools:ignore="LabelFor"
-            android:text="@={viewmodel.commentBody}"/>
+            android:text="@={viewmodel.commentBody}"
+            android:background="@drawable/round"
+            android:padding="5dp"/>
 
         <Button
             android:id="@+id/submit"
@@ -47,7 +50,9 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:onClick="@{() -> viewmodel.postComment()}" />
+            android:onClick="@{() -> viewmodel.postComment()}"
+            android:padding="5dp"
+            android:gravity="top|end" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
