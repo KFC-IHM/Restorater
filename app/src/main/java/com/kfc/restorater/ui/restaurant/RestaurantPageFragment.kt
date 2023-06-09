@@ -8,14 +8,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.kfc.restorater.R
 import com.kfc.restorater.databinding.FragmentRestaurantPageBinding
 import com.kfc.restorater.factory.ViewModelFactory
+import com.kfc.restorater.services.LocationHelper
 import com.kfc.restorater.ui.location.LocationFragment
 
 class RestaurantPageFragment : Fragment() {
 
     private lateinit var restaurantViewModel: RestaurantPageViewModel
     private var _binding: FragmentRestaurantPageBinding? = null
+    private var map: LocationFragment = LocationFragment()
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -34,7 +38,11 @@ class RestaurantPageFragment : Fragment() {
 
         binding.restaurantDriveTo.setOnClickListener { navigateGMaps() }
 
-        var map = LocationFragment()
+        binding.restaurantPostComment.setOnClickListener { findNavController().navigate(R.id.action_navigation_restaurant_to_post_comment) }
+        if (container != null) {
+            restaurantViewModel.context = container.context
+        }
+
         map.arguments = Bundle().apply {
             putParcelable(
                 "restaurant",
@@ -42,25 +50,24 @@ class RestaurantPageFragment : Fragment() {
             )
         }
 
-        childFragmentManager.beginTransaction().add(
-            com.kfc.restorater.R.id.restaurant_map,
-            map
-        ).commit()
+        if (childFragmentManager.findFragmentById(com.kfc.restorater.R.id.restaurant_map) == null)
+            childFragmentManager.beginTransaction().add(
+                com.kfc.restorater.R.id.restaurant_map,
+                map
+            ).commit()
 
         map =
             childFragmentManager.findFragmentById(com.kfc.restorater.R.id.restaurant_map) as LocationFragment
 
-        map.getLocation { location ->
+        LocationHelper.getLocation(requireActivity()) {location ->
             val restaurant = restaurantViewModel.restaurantRepository.currentRestaurant.get()
                 ?: return@getLocation
 
-            val distance = map.distanceBetween(location, restaurant)
+            val distance = LocationHelper.distanceBetween(location, restaurant)
             val distanceString = String.format("%.2f", distance / 1000)
             restaurantViewModel.distance.set(distanceString)
         }
-        if (container != null) {
-            restaurantViewModel.context = container.context
-        }
+
         binding.viewmodel = restaurantViewModel
         binding.lifecycleOwner = viewLifecycleOwner
 

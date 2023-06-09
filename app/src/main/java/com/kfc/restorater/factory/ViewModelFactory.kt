@@ -3,6 +3,7 @@ package com.kfc.restorater.factory
 import androidx.databinding.BaseObservable
 import com.kfc.restorater.data.LoginRepository
 import com.kfc.restorater.data.RestaurantRepository
+import com.kfc.restorater.data.ReviewRepository
 import com.kfc.restorater.recyclers.comment.CommentViewModel
 import com.kfc.restorater.ui.login.LoginViewModel
 import com.kfc.restorater.ui.user.UserViewModel
@@ -15,6 +16,7 @@ class ViewModelFactory {
     companion object {
         private val loginRepository = LoginRepository()
         private val restaurantRepository = RestaurantRepository()
+        private val reviewRepository = ReviewRepository()
 
         @Suppress("UNCHECKED_CAST")
         fun <T : BaseObservable> create(modelClass: Class<T>): T {
@@ -30,7 +32,8 @@ class ViewModelFactory {
             }
             if (modelClass.isAssignableFrom(CommentViewModel::class.java)) {
                 return CommentViewModel(
-                    loginRepository = loginRepository
+                    loginRepository = loginRepository,
+                    reviewRepository = reviewRepository
                 ) as T
             }
             if (modelClass.isAssignableFrom(com.kfc.restorater.recyclers.restaurant.RestaurantViewModel::class.java)) {
@@ -50,9 +53,30 @@ class ViewModelFactory {
             }
             if (modelClass.isAssignableFrom(com.kfc.restorater.recyclers.restaurantComments.RestaurantCommentViewModel::class.java)) {
                 return com.kfc.restorater.recyclers.restaurantComments.RestaurantCommentViewModel(
+                    restaurantRepository = restaurantRepository,
+                    reviewRepository = reviewRepository
+                ) as T
+            }
+            if (modelClass.isAssignableFrom(com.kfc.restorater.ui.comment.CommentPageViewModel::class.java)) {
+                return com.kfc.restorater.ui.comment.CommentPageViewModel(
+                    loginRepository = loginRepository,
+                    reviewRepository = reviewRepository
+                ) as T
+            }
+            if (modelClass.isAssignableFrom(com.kfc.restorater.ui.home.HomeViewModel::class.java)) {
+                return com.kfc.restorater.ui.home.HomeViewModel(
                     restaurantRepository = restaurantRepository
                 ) as T
             }
+            if (modelClass.isAssignableFrom(com.kfc.restorater.ui.post_comment.PostCommentViewModel::class.java)) {
+                return com.kfc.restorater.ui.post_comment.PostCommentViewModel(
+                    loginRepository = loginRepository,
+                    restaurantRepository = restaurantRepository,
+                    reviewRepository = reviewRepository
+                ) as T
+            }
+
+
             throw IllegalArgumentException("Unknown ViewModel class")
         }
     }

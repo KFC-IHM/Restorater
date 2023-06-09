@@ -7,7 +7,7 @@ import androidx.databinding.Observable
 import androidx.databinding.ObservableField
 import com.kfc.restorater.data.LoginRepository
 import com.kfc.restorater.model.users.ApiErrorAuth
-import com.kfc.restorater.repo.RetrofitWebServiceGenerator
+import com.kfc.restorater.repo.RetrofitWebServiceFactory
 import io.reactivex.disposables.Disposable
 
 class LoginViewModel(private val loginRepository: LoginRepository) : BaseObservable() {
@@ -44,7 +44,7 @@ class LoginViewModel(private val loginRepository: LoginRepository) : BaseObserva
                 { error ->
 
                     Log.d("LoginViewModel", "login: ${error.message}")
-                    val errorApi = RetrofitWebServiceGenerator.exceptionHandler(
+                    val errorApi = RetrofitWebServiceFactory.exceptionHandler(
                         error,
                         ApiErrorAuth::class.java
                     )

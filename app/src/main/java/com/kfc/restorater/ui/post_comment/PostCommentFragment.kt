@@ -1,16 +1,16 @@
-package com.kfc.restorater.ui.home
+package com.kfc.restorater.ui.post_comment
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.kfc.restorater.databinding.FragmentHomeBinding
+import com.kfc.restorater.databinding.FragmentPostCommentBinding
 import com.kfc.restorater.factory.ViewModelFactory
 
-class HomeFragment : Fragment() {
+class PostCommentFragment : Fragment() {
 
-    private var _binding: FragmentHomeBinding? = null
+    private var _binding: FragmentPostCommentBinding? = null
 
     private val binding get() = _binding!!
 
@@ -22,9 +22,10 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        binding.viewmodel = ViewModelFactory.create(HomeViewModel::class.java)
+        _binding = FragmentPostCommentBinding.inflate(inflater, container, false)
+        binding.viewmodel = ViewModelFactory.create(PostCommentViewModel::class.java)
 
         return binding.root
     }
+
 }

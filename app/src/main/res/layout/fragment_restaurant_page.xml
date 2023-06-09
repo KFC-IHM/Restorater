@@ -78,6 +78,7 @@
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:gravity="center"
+            android:layout="@layout/fragment_location"
             app:layout_constraintTop_toBottomOf="@+id/restaurant_info"
             tools:ignore="FragmentTagUsage" />
 
@@ -102,6 +103,19 @@
             android:src="@drawable/car_solid"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent"
+            tools:ignore="HardcodedText" />
+
+        <ImageButton
+            android:id="@+id/restaurant_post_comment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:background="@drawable/round"
+            android:contentDescription="Open Google Maps"
+            android:padding="10dp"
+            android:src="@drawable/pen_solid"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
             tools:ignore="HardcodedText" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,12 +2,15 @@ package com.kfc.restorater.recyclers.restaurantComments
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.kfc.restorater.R
 import com.kfc.restorater.data.RestaurantRepository
+import com.kfc.restorater.data.ReviewRepository
 import com.kfc.restorater.databinding.FragmentCommentBinding
 
 
-class RestaurantCommentRecyclerViewAdapter(private val restaurantRepository: RestaurantRepository) : RecyclerView.Adapter<RestaurantCommentRecyclerViewAdapter.ViewHolder>() {
+class RestaurantCommentRecyclerViewAdapter(private val restaurantRepository: RestaurantRepository, val reviewRepository: ReviewRepository) : RecyclerView.Adapter<RestaurantCommentRecyclerViewAdapter.ViewHolder>() {
 
     var reviews = restaurantRepository.currentRestaurant.get()?.review_set ?: emptyList()
 
@@ -22,7 +25,13 @@ class RestaurantCommentRecyclerViewAdapter(private val restaurantRepository: Res
         if (reviews[position].rating == 0) {
             holder.reviewRating.text = "No rating"
         }
+        holder.itemView.setOnClickListener {view ->
+            reviewRepository.setCurrentReview(reviews[position])
+            //findNavController()
+            view.findNavController().navigate(R.id.action_navigation_restaurant_to_navigation_comment_page)
+        }
     }
+
 
     override fun getItemCount(): Int = reviews.size
 

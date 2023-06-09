@@ -18,6 +18,7 @@ class RestaurantCommentFragment : Fragment() {
 
     private lateinit var restaurantCommentViewModel: RestaurantCommentViewModel
 
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -33,7 +34,7 @@ class RestaurantCommentFragment : Fragment() {
             with(view) {
                 layoutManager = LinearLayoutManager(context)
 
-                adapter = RestaurantCommentRecyclerViewAdapter(restaurantCommentViewModel.restaurantRepository)
+                adapter = RestaurantCommentRecyclerViewAdapter(restaurantCommentViewModel.restaurantRepository, restaurantCommentViewModel.reviewRepository)
             }
         }
         return view

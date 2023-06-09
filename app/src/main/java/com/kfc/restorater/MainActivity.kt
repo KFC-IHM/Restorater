@@ -18,15 +18,15 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        this.binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityMainBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
 
-        this.appBarConfiguration = AppBarConfiguration.Builder(
+        appBarConfiguration = AppBarConfiguration.Builder(
             R.id.navigation_home, R.id.navigation_location, R.id.navigation_user
         ).build()
 
-        this.navController = findNavController(this, R.id.nav_host_fragment_activity_main)
+        navController = findNavController(this, R.id.nav_host_fragment_activity_main)
 
         setupActionBarWithNavController(this, navController, appBarConfiguration)
         setupWithNavController(binding.navView, navController)

@@ -6,7 +6,7 @@ import io.reactivex.Single
 import retrofit2.http.Body
 import retrofit2.http.POST
 
-interface RetrofitAuthApi {
+interface AuthApi {
     @POST("/api-auth-jwt/login/")
     fun login(
         @Body body: Credentials,

@@ -2,14 +2,14 @@ package com.kfc.restorater.data
 
 import androidx.databinding.ObservableField
 import com.kfc.restorater.model.review.Review
-import com.kfc.restorater.repo.RetrofitWebServiceGenerator
-import com.kfc.restorater.repo.api.ReviewRepo
+import com.kfc.restorater.repo.RetrofitWebServiceFactory
+import com.kfc.restorater.repo.api.ReviewApi
 
 class ReviewRepository {
-    var currentReview: ObservableField<Review> = ObservableField()
+    val currentReview: ObservableField<Review> = ObservableField()
 
-    private val ratingWebService: ReviewRepo = RetrofitWebServiceGenerator.createService(
-        ReviewRepo::class.java)
+    private val ratingWebService: ReviewApi = RetrofitWebServiceFactory.build(
+        ReviewApi::class.java)
 
     fun getReview(id: Int) : ObservableField<Review> {
         val returnReview: ObservableField<Review> = ObservableField()
@@ -35,5 +35,19 @@ class ReviewRepository {
 
     fun setCurrentReview(review: Int) {
         currentReview.set(getReview(review).get())
+    }
+
+    fun postReview(review: Review) {
+        ratingWebService.createReview(review)
+            .subscribeOn(io.reactivex.schedulers.Schedulers.io())
+            .observeOn(io.reactivex.android.schedulers.AndroidSchedulers.mainThread())
+            .subscribe(
+                { r ->
+                    currentReview.set(r)
+                },
+                { _ ->
+                    currentReview.set(null)
+                }
+            )
     }
 }
