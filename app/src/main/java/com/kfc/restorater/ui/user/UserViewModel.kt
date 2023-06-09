@@ -6,7 +6,7 @@ import com.kfc.restorater.data.LoginRepository
 import com.kfc.restorater.repo.RetrofitWebServiceFactory
 import com.kfc.restorater.repo.api.UserApi
 
-class UserViewModel(val loginRepository: LoginRepository) : BaseObservable() {
+class UserViewModel() : BaseObservable() {
 
     val username = ObservableField("Loading...")
 
@@ -14,7 +14,11 @@ class UserViewModel(val loginRepository: LoginRepository) : BaseObservable() {
 
     private val userWebService = RetrofitWebServiceFactory.build(UserApi::class.java)
 
-    init {
+    var loginRepository: LoginRepository = LoginRepository()
+
+    constructor(loginRepository: LoginRepository) : this() {
+        this.loginRepository = loginRepository
+
         userWebService.getUser(loginRepository.user.get()!!.userId)
             .subscribeOn(io.reactivex.schedulers.Schedulers.io())
             .observeOn(io.reactivex.android.schedulers.AndroidSchedulers.mainThread())

@@ -78,6 +78,7 @@
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:gravity="center"
+            android:layout="@layout/fragment_location"
             app:layout_constraintTop_toBottomOf="@+id/restaurant_info"
             tools:ignore="FragmentTagUsage" />
 

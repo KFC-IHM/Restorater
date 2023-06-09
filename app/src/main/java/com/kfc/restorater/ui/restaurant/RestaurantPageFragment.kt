@@ -16,10 +16,15 @@ class RestaurantPageFragment : Fragment() {
 
     private lateinit var restaurantViewModel: RestaurantPageViewModel
     private var _binding: FragmentRestaurantPageBinding? = null
+    private lateinit var map: LocationFragment
 
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+
+    init {
+        map = LocationFragment()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,7 +39,10 @@ class RestaurantPageFragment : Fragment() {
 
         binding.restaurantDriveTo.setOnClickListener { navigateGMaps() }
 
-        var map = LocationFragment()
+        if (container != null) {
+            restaurantViewModel.context = container.context
+        }
+
         map.arguments = Bundle().apply {
             putParcelable(
                 "restaurant",
@@ -42,10 +50,11 @@ class RestaurantPageFragment : Fragment() {
             )
         }
 
-        childFragmentManager.beginTransaction().add(
-            com.kfc.restorater.R.id.restaurant_map,
-            map
-        ).commit()
+        if (childFragmentManager.findFragmentById(com.kfc.restorater.R.id.restaurant_map) == null)
+            childFragmentManager.beginTransaction().add(
+                com.kfc.restorater.R.id.restaurant_map,
+                map
+            ).commit()
 
         map =
             childFragmentManager.findFragmentById(com.kfc.restorater.R.id.restaurant_map) as LocationFragment
@@ -58,9 +67,7 @@ class RestaurantPageFragment : Fragment() {
             val distanceString = String.format("%.2f", distance / 1000)
             restaurantViewModel.distance.set(distanceString)
         }
-        if (container != null) {
-            restaurantViewModel.context = container.context
-        }
+
         binding.viewmodel = restaurantViewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
