@@ -2,6 +2,7 @@ package com.kfc.restorater.repo.api
 
 import com.kfc.restorater.model.comment.Comment
 import io.reactivex.Observable
+import io.reactivex.Single
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
@@ -28,6 +29,6 @@ interface CommentApi {
     ): Observable<Comment>
 
     @DELETE("comments/{id}")
-    fun deleteComment(@Path("id") id: Int): Observable<Comment>
+    fun deleteComment(@Path("id") id: Int): Single<Comment>
 
 }

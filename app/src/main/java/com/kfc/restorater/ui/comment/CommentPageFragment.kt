@@ -6,11 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.kfc.restorater.R
 import com.kfc.restorater.databinding.FragmentCommentPageBinding
-import com.kfc.restorater.databinding.FragmentLoginBinding
 import com.kfc.restorater.factory.ViewModelFactory
-import com.kfc.restorater.ui.comment.CommentPageViewModel
 
 class CommentPageFragment : Fragment() {
 
@@ -31,6 +28,10 @@ class CommentPageFragment : Fragment() {
         commentViewModel = ViewModelFactory.create(CommentPageViewModel::class.java)
         binding.viewmodel = commentViewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        findNavController()
+        if (container != null) {
+            commentViewModel.navController = findNavController()
+        }
         return binding.root
 
     }
