@@ -10,21 +10,18 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.kfc.restorater.databinding.FragmentRestaurantPageBinding
 import com.kfc.restorater.factory.ViewModelFactory
+import com.kfc.restorater.services.LocationHelper
 import com.kfc.restorater.ui.location.LocationFragment
 
 class RestaurantPageFragment : Fragment() {
 
     private lateinit var restaurantViewModel: RestaurantPageViewModel
     private var _binding: FragmentRestaurantPageBinding? = null
-    private lateinit var map: LocationFragment
+    private var map: LocationFragment = LocationFragment()
 
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
-
-    init {
-        map = LocationFragment()
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -59,11 +56,11 @@ class RestaurantPageFragment : Fragment() {
         map =
             childFragmentManager.findFragmentById(com.kfc.restorater.R.id.restaurant_map) as LocationFragment
 
-        map.getLocation { location ->
+        LocationHelper.getLocation(requireActivity()) {location ->
             val restaurant = restaurantViewModel.restaurantRepository.currentRestaurant.get()
                 ?: return@getLocation
 
-            val distance = map.distanceBetween(location, restaurant)
+            val distance = LocationHelper.distanceBetween(location, restaurant)
             val distanceString = String.format("%.2f", distance / 1000)
             restaurantViewModel.distance.set(distanceString)
         }
