@@ -63,6 +63,11 @@ class ViewModelFactory {
                     reviewRepository = reviewRepository
                 ) as T
             }
+            if (modelClass.isAssignableFrom(com.kfc.restorater.ui.home.HomeViewModel::class.java)) {
+                return com.kfc.restorater.ui.home.HomeViewModel(
+                    restaurantRepository = restaurantRepository
+                ) as T
+            }
 
 
             throw IllegalArgumentException("Unknown ViewModel class")
