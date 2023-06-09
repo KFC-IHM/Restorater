@@ -8,6 +8,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.kfc.restorater.R
 import com.kfc.restorater.databinding.FragmentRestaurantPageBinding
 import com.kfc.restorater.factory.ViewModelFactory
 import com.kfc.restorater.services.LocationHelper
@@ -36,6 +38,7 @@ class RestaurantPageFragment : Fragment() {
 
         binding.restaurantDriveTo.setOnClickListener { navigateGMaps() }
 
+        binding.restaurantPostComment.setOnClickListener { findNavController().navigate(R.id.action_navigation_restaurant_to_post_comment) }
         if (container != null) {
             restaurantViewModel.context = container.context
         }

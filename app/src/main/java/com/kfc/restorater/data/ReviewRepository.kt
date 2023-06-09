@@ -36,4 +36,18 @@ class ReviewRepository {
     fun setCurrentReview(review: Int) {
         currentReview.set(getReview(review).get())
     }
+
+    fun postReview(review: Review) {
+        ratingWebService.createReview(review)
+            .subscribeOn(io.reactivex.schedulers.Schedulers.io())
+            .observeOn(io.reactivex.android.schedulers.AndroidSchedulers.mainThread())
+            .subscribe(
+                { r ->
+                    currentReview.set(r)
+                },
+                { _ ->
+                    currentReview.set(null)
+                }
+            )
+    }
 }

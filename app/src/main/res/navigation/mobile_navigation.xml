@@ -60,6 +60,9 @@
         <action
             android:id="@+id/action_navigation_restaurant_to_navigation_comment_page"
             app:destination="@id/navigation_comment_page" />
+        <action
+            android:id="@+id/action_navigation_restaurant_to_post_comment"
+            app:destination="@id/post_comment" />
     </fragment>
 
     <fragment
@@ -71,5 +74,13 @@
         <action
             android:id="@+id/action_navigation_comment_page_to_navigation_user"
             app:destination="@id/navigation_user" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/post_comment"
+        android:name="com.kfc.restorater.ui.post_comment.PostCommentFragment"
+        android:label="Map"
+        tools:layout="@layout/fragment_post_comment" >
+
     </fragment>
 </navigation>

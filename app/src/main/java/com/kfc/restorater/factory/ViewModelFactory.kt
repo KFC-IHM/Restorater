@@ -68,6 +68,13 @@ class ViewModelFactory {
                     restaurantRepository = restaurantRepository
                 ) as T
             }
+            if (modelClass.isAssignableFrom(com.kfc.restorater.ui.post_comment.PostCommentViewModel::class.java)) {
+                return com.kfc.restorater.ui.post_comment.PostCommentViewModel(
+                    loginRepository = loginRepository,
+                    restaurantRepository = restaurantRepository,
+                    reviewRepository = reviewRepository
+                ) as T
+            }
 
 
             throw IllegalArgumentException("Unknown ViewModel class")
