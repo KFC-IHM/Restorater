@@ -28,6 +28,9 @@ class UserViewModel() : BaseObservable() {
                     if (user.is_moderator) {
                         listTitle.set("Commentaires à modérer")
                     }
+                    else{
+                        listTitle.set("Mes commentaires")
+                    }
                 },
                 { _ ->
                     username.set("Bonjour, User!")
