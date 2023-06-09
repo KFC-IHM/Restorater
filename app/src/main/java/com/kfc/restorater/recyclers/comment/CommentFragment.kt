@@ -35,7 +35,8 @@ class CommentFragment : Fragment() {
 
                 adapter = CommentRecyclerViewAdapter(
                     commentViewModel.loginRepository.userData.get()?.review_set ?: emptyList(),
-                    commentViewModel.loginRepository
+                    commentViewModel.loginRepository,
+                    commentViewModel.reviewRepository
                 )
 
                 userWebService.getUser(commentViewModel.loginRepository.user.get()?.userId ?: 0)
@@ -48,7 +49,8 @@ class CommentFragment : Fragment() {
                         if (!user.is_moderator) {
                             adapter = CommentRecyclerViewAdapter(
                                 user.review_set,
-                                commentViewModel.loginRepository
+                                commentViewModel.loginRepository,
+                                commentViewModel.reviewRepository
                             )
                         } else {
                             reviewWebservice.getReviews()
@@ -58,7 +60,8 @@ class CommentFragment : Fragment() {
                                     Log.d("CommentFragment", "reviews: $reviews")
                                     adapter = CommentRecyclerViewAdapter(
                                         reviews,
-                                        commentViewModel.loginRepository
+                                        commentViewModel.loginRepository,
+                                                commentViewModel.reviewRepository
                                     )
                                 }
                         }

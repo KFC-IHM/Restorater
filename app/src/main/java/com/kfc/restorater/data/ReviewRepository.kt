@@ -6,7 +6,7 @@ import com.kfc.restorater.repo.RetrofitWebServiceFactory
 import com.kfc.restorater.repo.api.ReviewApi
 
 class ReviewRepository {
-    var currentReview: ObservableField<Review> = ObservableField()
+    val currentReview: ObservableField<Review> = ObservableField()
 
     private val ratingWebService: ReviewApi = RetrofitWebServiceFactory.build(
         ReviewApi::class.java)

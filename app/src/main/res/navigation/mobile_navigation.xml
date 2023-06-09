@@ -57,6 +57,9 @@
         <action
             android:id="@+id/action_navigation_restaurant_to_navigation_home"
             app:destination="@id/navigation_home"/>
+        <action
+            android:id="@+id/action_navigation_restaurant_to_navigation_comment_page"
+            app:destination="@id/navigation_comment_page" />
     </fragment>
 
     <fragment

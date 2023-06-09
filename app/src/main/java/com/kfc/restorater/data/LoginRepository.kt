@@ -4,7 +4,6 @@ import android.util.Log
 import androidx.databinding.ObservableField
 import com.auth0.android.jwt.JWT
 import com.kfc.restorater.data.model.LoggedInUser
-import com.kfc.restorater.model.review.Review
 import com.kfc.restorater.model.users.Credentials
 import com.kfc.restorater.model.users.User
 import com.kfc.restorater.repo.RetrofitWebServiceFactory
@@ -26,7 +25,6 @@ class LoginRepository {
     val user = ObservableField<LoggedInUser>()
     val userData = ObservableField<User>()
     val userWebService = RetrofitWebServiceFactory.build(UserApi::class.java)
-    val review = ObservableField<Review>()
 
     fun login(username: String, password: String): Single<ObservableField<LoggedInUser>> {
         val credentials = Credentials(username, password)
@@ -60,9 +58,5 @@ class LoginRepository {
             }
 
 
-    }
-
-    fun setCurrentReview(review: Review) {
-        this.review.set(review)
     }
 }
